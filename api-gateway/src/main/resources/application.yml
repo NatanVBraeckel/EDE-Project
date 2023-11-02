@@ -96,16 +96,16 @@ spring:
         - id: enclosure-service-create
           uri: http://${ENCLOSURE_SERVICE_BASEURL:localhost:8080}
           predicates:
-            - Path=/enclosure/
+            - Path=/enclosure
             - Method=POST
           filters:
-            - SetPath=/api/enclosure/
+            - SetPath=/api/enclosure
         - id: enclosure-service-get-all
           uri: http://${ENCLOSURE_SERVICE_BASEURL:localhost:8080}
           predicates:
-            - Path=/enclosure/
+            - Path=/enclosure
           filters:
-            - SetPath=/api/enclosure/
+            - SetPath=/api/enclosure
         - id: enclosure-service-get-by-id
           uri: http://${ENCLOSURE_SERVICE_BASEURL:localhost:8080}
           predicates:
