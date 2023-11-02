@@ -19,9 +19,9 @@ public class FoodController {
     private final FoodService foodService;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
-    public void createAnimal(@RequestBody FoodRequest foodRequest) {
-        foodService.createFood(foodRequest);
+    public ResponseEntity<FoodResponse> createAnimal(@RequestBody FoodRequest foodRequest) {
+        FoodResponse foodResponse = foodService.createFood(foodRequest);
+        return new ResponseEntity<>(foodResponse, HttpStatus.OK);
     }
 
     @GetMapping

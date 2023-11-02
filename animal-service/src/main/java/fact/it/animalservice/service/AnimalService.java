@@ -40,7 +40,7 @@ public class AnimalService {
         return animals.stream().map(this::mapToAnimalResponse).toList();
     }
 
-    public void createAnimal(AnimalRequest animalRequest) {
+    public AnimalResponse createAnimal(AnimalRequest animalRequest) {
         Animal animal = Animal.builder()
                 .name(animalRequest.getName())
                 .animalCode(animalRequest.getAnimalCode())
@@ -50,6 +50,22 @@ public class AnimalService {
                 .build();
 
         animalRepository.save(animal);
+        return mapToAnimalResponse(animal);
+    }
+
+    public AnimalResponse updateAnimal(long animalId, AnimalRequest updateAnimal) {
+        Optional<Animal> animalOptional = animalRepository.findById(animalId);
+        if(animalOptional.isPresent()) {
+            Animal animal = animalOptional.get();
+            animal.setAnimalCode(updateAnimal.getAnimalCode());
+            animal.setName(updateAnimal.getName());
+            animal.setType(updateAnimal.getType());
+            animal.setBirthDate(updateAnimal.getBirthDate());
+            animal.setPreferredFood(updateAnimal.getPreferredFood());
+            animalRepository.save(animal);
+            return mapToAnimalResponse(animal);
+        }
+        return null;
     }
 
     public boolean deleteAnimal(Long animalId) {

@@ -19,9 +19,9 @@ public class EnclosureController {
     private final EnclosureService enclosureService;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
-    public void createEnclosure(@RequestBody EnclosureRequest enclosureRequest) {
-        enclosureService.createEnclosure(enclosureRequest);
+    public ResponseEntity<EnclosureResponse> createEnclosure(@RequestBody EnclosureRequest enclosureRequest) {
+        EnclosureResponse enclosureResponse = enclosureService.createEnclosure(enclosureRequest);
+        return new ResponseEntity<>(enclosureResponse, HttpStatus.OK);
     }
 
     @GetMapping("/{enclosureId}")

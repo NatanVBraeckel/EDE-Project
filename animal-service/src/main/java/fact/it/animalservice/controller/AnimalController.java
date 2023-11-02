@@ -18,9 +18,9 @@ public class AnimalController {
     private final AnimalService animalService;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
-    public void createAnimal(@RequestBody AnimalRequest animalRequest) {
-        animalService.createAnimal(animalRequest);
+    public ResponseEntity<AnimalResponse> createAnimal(@RequestBody AnimalRequest animalRequest) {
+        AnimalResponse animalResponse = animalService.createAnimal(animalRequest);
+        return new ResponseEntity<>(animalResponse, HttpStatus.OK);
     }
 
     @GetMapping("/byId/{animalId}")
@@ -39,6 +39,15 @@ public class AnimalController {
     @ResponseStatus(HttpStatus.OK)
     public List<AnimalResponse> getAllAnimals() {
         return animalService.getAllAnimals();
+    }
+
+    @PutMapping("/{animalId}")
+    public ResponseEntity<AnimalResponse> updateAnimal(@PathVariable Long animalId, @RequestBody AnimalRequest updateAnimal) {
+        AnimalResponse animalResponse = animalService.updateAnimal(animalId, updateAnimal);
+        if(animalResponse == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(animalResponse, HttpStatus.OK);
     }
 
     @DeleteMapping("/{animalId}")

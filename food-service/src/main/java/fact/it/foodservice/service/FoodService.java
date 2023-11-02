@@ -35,7 +35,7 @@ public class FoodService {
         return food.stream().map(this::mapToFoodResponse).toList();
     }
 
-    public void createFood(FoodRequest foodRequest) {
+    public FoodResponse createFood(FoodRequest foodRequest) {
         Food food = Food.builder()
                 .foodCode(foodRequest.getFoodCode())
                 .name(foodRequest.getName())
@@ -46,6 +46,7 @@ public class FoodService {
                 .build();
 
         foodRepository.save(food);
+        return mapToFoodResponse(food);
     }
 
     public FoodResponse updateStock(Long foodId, int amount) {
