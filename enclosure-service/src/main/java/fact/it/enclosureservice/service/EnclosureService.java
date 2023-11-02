@@ -26,7 +26,7 @@ public class EnclosureService {
     @Value("${animalservice.baseurl}")
     private String animalServiceBaseUrl;
 
-    public void createEnclosure(EnclosureRequest enclosureRequest) {
+    public EnclosureResponse createEnclosure(EnclosureRequest enclosureRequest) {
         Enclosure enclosure = Enclosure.builder()
                 .enclosureCode(enclosureRequest.getEnclosureCode())
                 .name(enclosureRequest.getName())
@@ -36,6 +36,7 @@ public class EnclosureService {
                 .build();
 
         enclosureRepository.save(enclosure);
+        return mapToEnclosureResponse(enclosure);
     }
 
     public List<EnclosureResponse> getAllEnclosures() {
