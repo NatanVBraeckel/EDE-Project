@@ -24,10 +24,16 @@ public class EnclosureController {
         return new ResponseEntity<>(enclosureResponse, HttpStatus.OK);
     }
 
-    @GetMapping("/{enclosureId}")
+    @GetMapping("/byId/{enclosureId}")
     @ResponseStatus(HttpStatus.OK)
     public List<EnclosureResponse> getEnclosureById(@PathVariable List<String> enclosureId) {
         return enclosureService.getEnclosureById(enclosureId);
+    }
+
+    @GetMapping("/{enclosureCode}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<EnclosureResponse> getEnclosureByEnclosureCode(@PathVariable List<String> enclosureCode) {
+        return enclosureService.getEnclosureByEnclosureCode(enclosureCode);
     }
 
     @GetMapping
