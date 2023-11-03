@@ -73,7 +73,7 @@ services:
   environment:
    FOOD_SERVICE_BASEURL: food-service:8081
    ANIMAL_SERVICE_BASEURL: animal-service:8082
-   ENCLOSURE_SERVICE_BASEURL: animal-service:8080
+   ENCLOSURE_SERVICE_BASEURL: enclosure-service:8080
 
 volumes:
  mysql_food_data:
