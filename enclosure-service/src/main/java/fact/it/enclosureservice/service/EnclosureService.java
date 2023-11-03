@@ -51,6 +51,12 @@ public class EnclosureService {
         return enclosures.stream().map(this::mapToEnclosureResponse).toList();
     }
 
+    public List<EnclosureResponse> getEnclosureByEnclosureCode(List<String> enclosureCode) {
+        List<Enclosure> enclosures = enclosureRepository.findAllByEnclosureCodeIn(enclosureCode);
+
+        return enclosures.stream().map(this::mapToEnclosureResponse).toList();
+    }
+
     public boolean deleteEnclosure(String enclosureId) {
         Optional<Enclosure> enclosureOptional = enclosureRepository.findById(enclosureId);
         if(enclosureOptional.isPresent()) {
