@@ -1,0 +1,127 @@
+server:
+  port: 8083
+
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator: INFO
+    reactor.netty: TRACE
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        #food service
+        - id: food-service-create
+          uri: http://${FOOD_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/food
+            - Method=POST
+          filters:
+            - SetPath=/api/food
+        - id: food-service-get-all
+          uri: http://${FOOD_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/food
+          filters:
+            - SetPath=/api/food
+        - id: food-service-get-by-id
+          uri: http://${FOOD_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/food/byId/{foodId}
+          filters:
+            - SetPath=/api/food/byId/{foodId}
+        - id: food-service-get-by-food-code
+          uri: http://${FOOD_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/food/{foodCode}
+          filters:
+            - SetPath=/api/food/{foodCode}
+        - id: food-service-update-stock
+          uri: http://${FOOD_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/food/{foodId}/updateStock
+            - Method=PUT
+          filters:
+            - SetPath=/api/food/{foodId}/updateStock
+        - id: food-service-delete
+          uri: http://${FOOD_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/food/{foodId}
+            - Method=DELETE
+          filters:
+            - SetPath=/api/food/{foodId}
+        #animal service
+        - id: animal-service-create
+          uri: http://${ANIMAL_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/animal
+            - Method=POST
+          filters:
+            - SetPath=/api/animal
+        - id: animal-service-get-all
+          uri: http://${ANIMAL_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/animal
+          filters:
+            - SetPath=/api/animal
+        - id: animal-service-get-by-id
+          uri: http://${ANIMAL_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/animal/byId/{animalId}
+          filters:
+            - SetPath=/api/animal/byId/{animalId}
+        - id: animal-service-get-by-animal-code
+          uri: http://${ANIMAL_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/animal/{animalCode}
+          filters:
+            - SetPath=/api/animal/{animalCode}
+        - id: animal-service-update
+          uri: http://${ANIMAL_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/animal/{animalId}
+            - Method=PUT
+          filters:
+            - SetPath=/api/animal/{animalId}
+        - id: animal-service-delete
+          uri: http://${ANIMAL_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/animal/{animalId}
+            - Method=DELETE
+          filters:
+            - SetPath=/api/animal/{animalId}
+        #enclosure service
+        - id: enclosure-service-create
+          uri: http://${ENCLOSURE_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/enclosure
+            - Method=POST
+          filters:
+            - SetPath=/api/enclosure
+        - id: enclosure-service-get-all
+          uri: http://${ENCLOSURE_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/enclosure
+          filters:
+            - SetPath=/api/enclosure
+        - id: enclosure-service-get-by-id
+          uri: http://${ENCLOSURE_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/enclosure/byId/{enclosureId}
+          filters:
+            - SetPath=/api/enclosure/byId/{enclosureId}
+        - id: enclosure-service-get-by-enclosure-code
+          uri: http://${ENCLOSURE_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/enclosure/{enclosureCode}
+          filters:
+            - SetPath=/api/enclosure/{enclosureCode}
+        - id: enclosure-service-delete
+          uri: http://${ENCLOSURE_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/enclosure/{enclosureId}
+            - Method=DELETE
+          filters:
+            - SetPath=/api/enclosure/{enclosureId}
