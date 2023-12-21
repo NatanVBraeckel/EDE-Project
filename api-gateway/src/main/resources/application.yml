@@ -14,8 +14,8 @@ spring:
       client:
         registration:
           google:
-            client-id: 865547574807-1g0m8e4nekotfl7fhmb1q02k0ujv4q99.apps.googleusercontent.com
-            client-secret: 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
+            client-id: ${GOOGLE_CLIENTID}
+            client-secret: ${GOOGLE_CLIENTSECRET}
             scope: openid,profile,email
       resourceserver:
         jwt:
