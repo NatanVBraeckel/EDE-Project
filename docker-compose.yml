@@ -30,8 +30,6 @@ services:
   image: natanvanbraeckel/food-service
   ports:
     - 8081:8081
-  links:
-    - mysql-food
   environment:
    MYSQL_DB_USERNAME: root
    MYSQL_DB_PASSWORD: abc123
@@ -45,9 +43,6 @@ services:
   image: natanvanbraeckel/animal-service
   ports:
     - 8082:8082
-  links:
-    - mysql-animal
-    - food-service
   environment:
    MYSQL_DB_USERNAME: root
    MYSQL_DB_PASSWORD: abc123
@@ -62,13 +57,23 @@ services:
   image: natanvanbraeckel/enclosure-service
   ports:
     - 8080:8080
-  links:
-    - mongo-enclosure
-    - animal-service
   environment:
    MONGODB_PORT: 27017
    MONGODB_HOST: mongo-enclosure
    ANIMAL_SERVICE_BASEURL: animal-service:8082
+
+ api-gateway:
+  depends_on:
+    - food-service
+    - animal-service
+    - enclosure-service
+  image: natanvanbraeckel/api-gateway
+  ports:
+    - 8083:8083
+  environment:
+   FOOD_SERVICE_BASEURL: food-service:8081
+   ANIMAL_SERVICE_BASEURL: animal-service:8082
+   ENCLOSURE_SERVICE_BASEURL: enclosure-service:8080
 
 volumes:
  mysql_food_data:
