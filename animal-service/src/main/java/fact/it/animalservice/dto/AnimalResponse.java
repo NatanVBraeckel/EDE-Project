@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -17,6 +18,6 @@ public class AnimalResponse {
     private String animalCode;
     private String name;
     private AnimalType type;
-    private Date birthDate;
+    private LocalDate birthDate;
     private FoodResponse preferredFood;
 }

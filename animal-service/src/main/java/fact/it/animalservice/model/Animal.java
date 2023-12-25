@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -19,6 +20,6 @@ public class Animal {
     private String animalCode;
     private String name;
     private AnimalType type;
-    private Date birthDate;
+    private LocalDate birthDate;
     private String preferredFood;
 }

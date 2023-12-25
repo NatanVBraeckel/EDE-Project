@@ -22,7 +22,7 @@ jobs:
       
       - name: Build, test and package project
         working-directory: food-service
-        run: mvn package -DskipTests
+        run: mvn package -B
 
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
@@ -48,7 +48,7 @@ jobs:
 
       - name: Build, test and package project
         working-directory: animal-service
-        run: mvn package -DskipTests
+        run: mvn package -B
 
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
@@ -74,7 +74,7 @@ jobs:
         
       - name: Build, test and package project
         working-directory: enclosure-service
-        run: mvn package -DskipTests
+        run: mvn package -B
         
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
