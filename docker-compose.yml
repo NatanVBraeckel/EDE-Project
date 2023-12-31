@@ -37,7 +37,7 @@ services:
 
  keycloak-service:
   image: quay.io/keycloak/keycloak:20.0.0
-  command: start --optimized --proxy=passthrough --verbose
+  command: start --optimized --proxy=passthrough
   # command: start-dev
   # command: ["-b", "0.0.0.0", "--proxy-address-forwarding"]
   environment:
