@@ -37,6 +37,7 @@ services:
 
  keycloak_service:
   image: quay.io/keycloak/keycloak:15.0.2
+  command: ["-b", "0.0.0.0", "--proxy-address-forwarding"]
   environment:
    DB_VENDOR: postgres
    DB_ADDR: postgres_keycloak
