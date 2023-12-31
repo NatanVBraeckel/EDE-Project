@@ -25,7 +25,7 @@ services:
     - mongodb_enclosure_data:/data/db
 
  postgres_keycloak:
-  image: postgres:13.2
+  image: postgres:15.5
   volumes:
    - postgres_keycloak_data:/var/lib/postgresql/data
   environment:
@@ -36,7 +36,7 @@ services:
    - 5432:5432
 
  keycloak_service:
-  image: quay.io/keycloak/keycloak:15.0.2
+  image: quay.io/keycloak/keycloak:latest
   # command: ["-b", "0.0.0.0", "--proxy-address-forwarding"]
   environment:
    DB_VENDOR: postgres
