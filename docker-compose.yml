@@ -23,7 +23,33 @@ services:
     - 27017:27017
   volumes:
     - mongodb_enclosure_data:/data/db
-   
+
+ postgres_keycloak:
+  image: postgres:13.2
+  volumes:
+   - postgres_keycloak_data:/var/lib/postgresql/data
+  environment:
+   POSTGRES_DB: keycloak
+   POSTGRES_USER: keycloak
+   POSTGRES_PASSWORD: password
+  ports:
+   - 5432:5432
+
+ keycloak_service:
+  image: quay.io/keycloak/keycloak:15.0.2
+  environment:
+   DB_VENDOR: postgres
+   DB_ADDR: postgres_keycloak
+   DB_DATABASE: keycloak
+   DB_USER: keycloak
+   DB_PASSWORD: password
+   KEYCLOAK_USER: admin
+   KEYCLOAK_PASSWORD: admin
+  ports:
+   - 8080:8080
+  depends_on:
+   - postgres_keycloak
+
  food-service:
   depends_on:
     - mysql-food
@@ -79,3 +105,4 @@ volumes:
  mysql_food_data:
  mysql_animal_data:
  mongodb_enclosure_data:
+ postgres_keycloak_data:
