@@ -37,7 +37,7 @@ services:
 
  keycloak_service:
   image: quay.io/keycloak/keycloak:15.0.2
-  command: ["-b", "0.0.0.0", "--proxy-address-forwarding"]
+  # command: ["-b", "0.0.0.0", "--proxy-address-forwarding"]
   environment:
    DB_VENDOR: postgres
    DB_ADDR: postgres_keycloak
@@ -46,6 +46,7 @@ services:
    DB_PASSWORD: password
    KEYCLOAK_USER: admin
    KEYCLOAK_PASSWORD: admin
+   KC_HOSTNAME_ADMIN_URL: https://keycloak-service-natanvbraeckel.cloud.okteto.net/
   ports:
    - 8084:8080
   depends_on:
