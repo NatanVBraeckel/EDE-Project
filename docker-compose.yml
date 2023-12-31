@@ -37,7 +37,8 @@ services:
 
  keycloak-service:
   image: quay.io/keycloak/keycloak:20.0.0
-  command: start-dev
+  command: sh -c "start-dev && /bin/sh -c --proxy-address-forwarding"
+  # command: start-dev
   # command: ["-b", "0.0.0.0", "--proxy-address-forwarding"]
   environment:
    DB_VENDOR: postgres
