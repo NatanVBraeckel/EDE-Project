@@ -37,7 +37,7 @@ services:
 
  keycloak-service:
   image: quay.io/keycloak/keycloak:20.0.0
-  command: start --proxy=passthrough
+  command: start --optimized --proxy=passthrough --verbose
   # command: start-dev
   # command: ["-b", "0.0.0.0", "--proxy-address-forwarding"]
   environment:
@@ -50,7 +50,7 @@ services:
   #  KEYCLOAK_PASSWORD: admin
    KEYCLOAK_ADMIN: admin
    KEYCLOAK_ADMIN_PASSWORD: admin
-   KC_HOSTNAME_ADMIN_URL: keycloak-service-natanvbraeckel.cloud.okteto.net
+  #  KC_HOSTNAME_ADMIN_URL: keycloak-service-natanvbraeckel.cloud.okteto.net
   ports:
    - 8084:8080
   depends_on:
