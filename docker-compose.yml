@@ -50,7 +50,7 @@ services:
   #  KEYCLOAK_PASSWORD: admin
    KEYCLOAK_ADMIN: admin
    KEYCLOAK_ADMIN_PASSWORD: admin
-  #  KC_HOSTNAME_ADMIN_URL: keycloak-service-natanvbraeckel.cloud.okteto.net
+   KC_HOSTNAME_ADMIN_URL: keycloak-service-natanvbraeckel.cloud.okteto.net
   ports:
    - 8084:8080
   depends_on:
