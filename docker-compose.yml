@@ -24,7 +24,7 @@ services:
   volumes:
     - mongodb_enclosure_data:/data/db
 
- postgres_keycloak:
+ postgres-keycloak:
   image: postgres:14.2
   volumes:
    - postgres_keycloak_data:/var/lib/postgresql/data
@@ -35,7 +35,7 @@ services:
   ports:
    - 5432:5432
 
- keycloak_service:
+ keycloak-service:
   image: quay.io/keycloak/keycloak:20.0.0
   command: start-dev
   # command: ["-b", "0.0.0.0", "--proxy-address-forwarding"]
@@ -45,8 +45,10 @@ services:
    DB_DATABASE: keycloak
    DB_USER: keycloak
    DB_PASSWORD: password
-   KEYCLOAK_USER: admin
-   KEYCLOAK_PASSWORD: admin
+  #  KEYCLOAK_USER: admin
+  #  KEYCLOAK_PASSWORD: admin
+   KEYCLOAK_ADMIN: admin
+   KEYCLOAK_ADMIN_PASSWORD: admin
    KC_HOSTNAME_ADMIN_URL: https://keycloak-service-natanvbraeckel.cloud.okteto.net/
   ports:
    - 8084:8080
