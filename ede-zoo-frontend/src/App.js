@@ -3,49 +3,26 @@ import './App.css';
 import Home from './components/home';
 import Food from './components/food';
 import FoodDetail from './components/food-detail';
-import Login from './components/login';
-import Logout from './components/logout';
 import { useEffect } from 'react';
-import { gapi } from  'gapi-script';
 import ConfigData from './config.json';
 
 function NavBar() {
-  const styles = {
-    navbar: {
-      color: 'blue',
-      fontWeight: "bold",
-    }
+
+  function handleCallbackResponse(response) {
+    console.log("Encoded JWT ID token:", response.credential);
   }
 
   useEffect(() => {
-    function start() {
-      gapi.client.init({
-        clientId: ConfigData.clientId,
-        scope: ""
-      }).then(() => {
-        // Get the Google Auth instance
-        const authInstance = gapi.auth2.getAuthInstance();
-          
-        // Check if the user is signed in
-        if (authInstance.isSignedIn.get()) {
-          // Retrieve the current user
-          const currentUser = authInstance.currentUser.get();
-          
-          // Get the ID token
-          const idToken = currentUser.getAuthResponse().id_token;
-          
-          // Use the ID token as needed (e.g., send it to the backend)
-          console.log('ID Token:', idToken);
-          
-          // You can now send this ID token to your backend for verification or further use
-          // For example, you might send it to your Java API Gateway for authentication
-        } else {
-          console.log("not signed in?");
-        }
-      });
-    };
+    /* global google */
+    google.accounts.id.initialize({
+      client_id: ConfigData.clientId,
+      callback: handleCallbackResponse
+    });
 
-    gapi.load('client:auth2', start);
+    google.accounts.id.renderButton(
+      document.getElementById("signInDiv"),
+      { theme: "outline", size: "large" }
+    );
   }, []);
 
   return (
@@ -55,8 +32,7 @@ function NavBar() {
         <li><NavLink to={"/food"} className={"nav-link"}>Food</NavLink></li>
         <li><NavLink to={"/animal"} className={"nav-link"}>Animals</NavLink></li>
         <li><NavLink to={"/enclosure"} className={"nav-link"}>Enclosures</NavLink></li>
-        <li><Login/></li>
-        <li><Logout/></li>
+        <li><div id='signInDiv'></div></li>
       </ul>
     </nav>
   )
