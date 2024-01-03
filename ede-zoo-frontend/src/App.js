@@ -8,6 +8,8 @@ import ConfigData from './config.json';
 import { RecoilRoot, useRecoilState, useSetRecoilState } from 'recoil';
 import { jwtDecode } from 'jwt-decode';
 import { jwtState, userState } from './store';
+import Enclosure from './components/enclosure';
+import Animal from './components/animal';
 
 function NavBar() {
 
@@ -79,6 +81,14 @@ function Main() {
       <Route path={'/food'} element={<Outlet />}>
         <Route index element={<Food />}/>
         <Route path={':id'} element={<FoodDetail />}/>
+      </Route>
+      <Route path={'/animal'} element={<Outlet />}>
+        <Route index element={<Animal />}/>
+        {/* <Route path={':id'} element={<AnimalDetail />}/> */}
+      </Route>
+      <Route path={'/enclosure'} element={<Outlet />}>
+        <Route index element={<Enclosure />}/>
+        {/* <Route path={':id'} element={<EnclosureDetail />}/> */}
       </Route>
     </Routes>
   </div>

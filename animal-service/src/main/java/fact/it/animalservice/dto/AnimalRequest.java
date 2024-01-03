@@ -19,5 +19,5 @@ public class AnimalRequest {
     private String animalCode;
     private AnimalType type;
     private LocalDate birthDate;
-    private String preferredFood;
+    private String codePreferredFood;
 }

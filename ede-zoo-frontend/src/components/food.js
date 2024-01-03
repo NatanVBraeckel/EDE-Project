@@ -6,7 +6,7 @@ function Food() {
         const getAllFood = async () => {
             try {
                 const result = await FoodApi.getAllFood();
-                console.log(result.data);
+                console.log("Result:", result.data);
             } catch {
                 console.warn("Something went wrong with the all food call");
             }

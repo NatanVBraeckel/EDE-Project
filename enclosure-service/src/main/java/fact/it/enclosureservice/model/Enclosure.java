@@ -21,6 +21,6 @@ public class Enclosure {
     private String name;
     private EnclosureSize size;
     private EnclosureType type;
-    private List<String> animals;
+    private List<String> animalCodes;
 
 }

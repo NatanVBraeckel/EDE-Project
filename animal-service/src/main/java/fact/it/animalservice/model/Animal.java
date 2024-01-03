@@ -21,5 +21,5 @@ public class Animal {
     private String name;
     private AnimalType type;
     private LocalDate birthDate;
-    private String preferredFood;
+    private String codePreferredFood;
 }
