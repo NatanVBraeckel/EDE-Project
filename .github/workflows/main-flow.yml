@@ -54,10 +54,10 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Build
-        run: docker build -t ${{ secrets.DOCKER_USER }}/animal-service:latest ./animal-service
+        run: docker build -t ${{ secrets.DOCKER_USER }}/animal-service-nulls:latest ./animal-service
 
       - name: Upload container to Docker Hub with Push
-        run: docker push ${{ secrets.DOCKER_USER }}/animal-service:latest
+        run: docker push ${{ secrets.DOCKER_USER }}/animal-service-nulls:latest
   enclosureservice:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver enclosure-service container
@@ -80,10 +80,10 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Build
-        run: docker build -t ${{ secrets.DOCKER_USER }}/enclosure-service:latest ./enclosure-service
+        run: docker build -t ${{ secrets.DOCKER_USER }}/enclosure-service-nulls:latest ./enclosure-service
 
       - name: Upload container to Docker Hub with Push
-        run: docker push ${{ secrets.DOCKER_USER }}/enclosure-service:latest
+        run: docker push ${{ secrets.DOCKER_USER }}/enclosure-service-nulls:latest
   apigateway:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver api-gateway container

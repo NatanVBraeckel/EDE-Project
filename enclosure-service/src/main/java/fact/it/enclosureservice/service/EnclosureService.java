@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,7 +30,7 @@ public class EnclosureService {
                 .name(enclosureRequest.getName())
                 .type(enclosureRequest.getType())
                 .size(enclosureRequest.getSize())
-                .animals(enclosureRequest.getAnimals())
+                .animalCodes(enclosureRequest.getAnimalCodes())
                 .build();
 
         enclosureRepository.save(enclosure);
@@ -69,30 +67,42 @@ public class EnclosureService {
     }
 
     private EnclosureResponse mapToEnclosureResponse(Enclosure enclosure) {
-        String animalCodesQueryParam = String.join(",", enclosure.getAnimals());
+        List<String> animalCodes = enclosure.getAnimalCodes();
 
-//        AnimalResponse[] animalResponseArray = webClient.get()
-//                .uri(uriBuilder -> uriBuilder
-//                        .path("http://localhost:8082/api/animal")
-//                        .queryParam("animalId", animalIdsQueryParam)
-//                        .build())
-//                .retrieve()
-//                .bodyToMono(AnimalResponse[].class)
-//                .block();
+        //only request from the animal service if there are animal codes
+        if(animalCodes != null && !animalCodes.isEmpty()) {
+            String animalCodesQueryParam = String.join(",", animalCodes);
 
-        AnimalResponse[] animalResponseArray = webClient.get()
-                .uri("http://" + animalServiceBaseUrl + "/api/animal/" + animalCodesQueryParam)
-                .retrieve()
-                .bodyToMono(AnimalResponse[].class)
-                .block();
+            AnimalResponse[] animalResponseArray = webClient.get()
+                    .uri("http://" + animalServiceBaseUrl + "/api/animal/" + animalCodesQueryParam)
+                    .retrieve()
+                    .bodyToMono(AnimalResponse[].class)
+                    .block();
 
+            // assign only when at least 1 animal found
+            if (animalResponseArray != null && animalResponseArray.length > 0) {
+                return EnclosureResponse.builder()
+                        .id(enclosure.getId())
+                        .enclosureCode(enclosure.getEnclosureCode())
+                        .name(enclosure.getName())
+                        .type(enclosure.getType())
+                        .size(enclosure.getSize())
+                        .animalCodes(enclosure.getAnimalCodes())
+                        .animals(Arrays.asList(animalResponseArray))
+                        .build();
+            }
+        }
+
+        // no animalCodes or no animalReponses found
         return EnclosureResponse.builder()
                 .id(enclosure.getId())
                 .enclosureCode(enclosure.getEnclosureCode())
                 .name(enclosure.getName())
                 .type(enclosure.getType())
                 .size(enclosure.getSize())
-                .animals(Arrays.asList(animalResponseArray))
+                .animalCodes(enclosure.getAnimalCodes())
+                .animals(Collections.emptyList())
                 .build();
+
     }
 }

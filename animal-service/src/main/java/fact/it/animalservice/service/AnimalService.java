@@ -46,7 +46,7 @@ public class AnimalService {
                 .animalCode(animalRequest.getAnimalCode())
                 .type(animalRequest.getType())
                 .birthDate(animalRequest.getBirthDate())
-                .preferredFood(animalRequest.getPreferredFood())
+                .codePreferredFood(animalRequest.getCodePreferredFood())
                 .build();
 
         animalRepository.save(animal);
@@ -61,7 +61,7 @@ public class AnimalService {
             animal.setName(updateAnimal.getName());
             animal.setType(updateAnimal.getType());
             animal.setBirthDate(updateAnimal.getBirthDate());
-            animal.setPreferredFood(updateAnimal.getPreferredFood());
+            animal.setCodePreferredFood(updateAnimal.getCodePreferredFood());
             animalRepository.save(animal);
             return mapToAnimalResponse(animal);
         }
@@ -80,13 +80,17 @@ public class AnimalService {
     }
 
     private AnimalResponse mapToAnimalResponse(Animal animal) {
+        FoodResponse foodResponse = null;
 
         FoodResponse[] foodResponseArray = webClient.get()
-                .uri("http://" + foodServiceBaseUrl + "/api/food/" + animal.getPreferredFood())
+                .uri("http://" + foodServiceBaseUrl + "/api/food/" + animal.getCodePreferredFood())
                 .retrieve()
                 .bodyToMono(FoodResponse[].class)
                 .block();
-        FoodResponse foodResponse = foodResponseArray[0];
+        // assign only when food is found
+        if (foodResponseArray != null && foodResponseArray.length > 0) {
+            foodResponse = foodResponseArray[0];
+        }
 
         return AnimalResponse.builder()
                 .id(animal.getId())
@@ -94,6 +98,7 @@ public class AnimalService {
                 .animalCode(animal.getAnimalCode())
                 .type(animal.getType())
                 .birthDate(animal.getBirthDate())
+                .codePreferredFood(animal.getCodePreferredFood())
                 .preferredFood(foodResponse)
                 .build();
     }

@@ -20,5 +20,6 @@ public class EnclosureResponse {
     private String name;
     private EnclosureSize size;
     private EnclosureType type;
+    private List<String> animalCodes;
     private List<AnimalResponse> animals;
 }
