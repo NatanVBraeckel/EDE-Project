@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/food")
@@ -40,6 +41,15 @@ public class FoodController {
     @ResponseStatus(HttpStatus.OK)
     public List<FoodResponse> getFoodByFoodCode(@PathVariable List<String> foodCode) {
         return foodService.getFoodByFoodCode(foodCode);
+    }
+
+    @PutMapping("/{foodId}")
+    public ResponseEntity<FoodResponse> updateFood(@PathVariable Long foodId, @RequestBody FoodRequest updateFood) {
+        FoodResponse foodResponse = foodService.updateFood(foodId, updateFood);
+        if(foodResponse == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(foodResponse, HttpStatus.OK);
     }
 
     @PutMapping("/{foodId}/updateStock")

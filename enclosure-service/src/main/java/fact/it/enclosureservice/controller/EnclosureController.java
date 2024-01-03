@@ -42,6 +42,15 @@ public class EnclosureController {
         return enclosureService.getAllEnclosures();
     }
 
+    @PutMapping("/{enclosureId}")
+    public ResponseEntity<EnclosureResponse> updateAnimal(@PathVariable String enclosureId, @RequestBody EnclosureRequest updateEnclosure) {
+        EnclosureResponse enclosureResponse = enclosureService.updateEnclosure(enclosureId, updateEnclosure);
+        if(enclosureResponse == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(enclosureResponse, HttpStatus.OK);
+    }
+
     @DeleteMapping("/{enclosureId}")
     public ResponseEntity<?> deleteEnclosure(@PathVariable String enclosureId) {
         if(enclosureService.deleteEnclosure(enclosureId)) {

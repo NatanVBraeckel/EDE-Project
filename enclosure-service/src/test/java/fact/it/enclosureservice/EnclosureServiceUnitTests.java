@@ -272,6 +272,65 @@ public class EnclosureServiceUnitTests {
 
         verify(enclosureRepository, times(1)).save(any(Enclosure.class));
     }
+
+    @Test
+    public void testUpdateEnclosure_Success() {
+        // Arrange
+        Enclosure enclosure1 = new Enclosure("6542c800712e1a7c6a3e77e5", "MediumSavannahLion",
+                "Lion Savannah", EnclosureSize.Medium, EnclosureType.Savannah, Arrays.asList("NalaLion2002", "SimbaLion2016"));
+        EnclosureRequest enclosureToUpdate = new EnclosureRequest("LargeForestLion",
+                "Lion Forest", EnclosureSize.Large, EnclosureType.Forest, Arrays.asList("NalaLion2002", "SimbaLion2016"));
+
+        FoodResponse foodResponse = new FoodResponse(1L, "MeatPigFoot", "Pig foot", "Meat", "1 unit", "Germany", 26);
+        AnimalResponse animalResponseNala = new AnimalResponse(1L, "NalaLion2002", "Nala", "Lion", LocalDate.parse("1994-06-15"), foodResponse);
+        AnimalResponse animalResponseSimba = new AnimalResponse(2L, "SimbaLion2016", "Simba", "Lion", LocalDate.parse("2016-02-01"), foodResponse);
+
+        when(enclosureRepository.findById("6542c800712e1a7c6a3e77e5")).thenReturn(Optional.of(enclosure1));
+
+        when(webClient.get()).thenReturn(requestHeadersUriSpec);
+
+        // when the animals of the first enclosure get called
+        when(requestHeadersUriSpec.uri("http://localhost:8082/api/animal/NalaLion2002,SimbaLion2016"))
+                .thenReturn(requestHeadersSpecSavannah);
+        when(requestHeadersSpecSavannah.retrieve())
+                .thenReturn(responseSpecSavannah);
+        when(responseSpecSavannah.bodyToMono(AnimalResponse[].class))
+                .thenReturn(Mono.just(new AnimalResponse[]{animalResponseNala, animalResponseSimba}));
+
+        // Act
+        EnclosureResponse updatedEnclosure = enclosureService.updateEnclosure("6542c800712e1a7c6a3e77e5", enclosureToUpdate);
+
+        // Assert
+        assertEquals("LargeForestLion", updatedEnclosure.getEnclosureCode());
+        assertEquals("Lion Forest", updatedEnclosure.getName());
+        assertEquals(EnclosureSize.Large, updatedEnclosure.getSize());
+        assertEquals(EnclosureType.Forest, updatedEnclosure.getType());
+
+        assertEquals(2, updatedEnclosure.getAnimals().size());
+        assertEquals("NalaLion2002", updatedEnclosure.getAnimals().get(0).getAnimalCode());
+        assertEquals("SimbaLion2016", updatedEnclosure.getAnimals().get(1).getAnimalCode());
+
+        verify(enclosureRepository, times(1)).findById("6542c800712e1a7c6a3e77e5");
+        verify(enclosureRepository, times(1)).save(any(Enclosure.class));
+    }
+
+    @Test
+    public void testUpdateEnclosure_Failure() {
+        // Arrange
+        EnclosureRequest enclosureToUpdate = new EnclosureRequest("LargeForestLion",
+                "Lion Forest", EnclosureSize.Large, EnclosureType.Forest, Arrays.asList("NalaLion2002", "SimbaLion2016"));
+
+        when(enclosureRepository.findById("6542c800712e1a7c6a3e77e5")).thenReturn(Optional.empty());
+
+        // Act
+        EnclosureResponse updatedEnclosure = enclosureService.updateEnclosure("6542c800712e1a7c6a3e77e5", enclosureToUpdate);
+
+        // Assert
+        assertNull(updatedEnclosure);
+
+        verify(enclosureRepository, times(1)).findById("6542c800712e1a7c6a3e77e5");
+        verify(enclosureRepository, never()).save(any(Enclosure.class));
+    }
     @Test
     public void testDeleteEnclosure_Success() {
         // Arrange

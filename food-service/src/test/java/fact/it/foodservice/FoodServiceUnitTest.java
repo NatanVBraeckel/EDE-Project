@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.swing.text.html.Option;
 import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -133,6 +134,44 @@ public class FoodServiceUnitTest {
         assertEquals(150, food.getStock());
 
         verify(foodRepository, times(1)).save(any(Food.class));
+    }
+    @Test
+    public void testUpdateFood_Success() {
+        // Arrange
+        Food food1 = new Food(1L, "VegetableCorn", "Corn", "Vegetable", "20 units", "Belgium", 405);
+        FoodRequest foodToUpdate = new FoodRequest("Bamboo", "VegetableBamboo", "Vegetable", "20 units", "China", 600);
+
+        when(foodRepository.findById(1L)).thenReturn(Optional.of(food1));
+
+        // Act
+        FoodResponse updatedFood = foodService.updateFood(1L, foodToUpdate);
+
+        // Assert
+        assertEquals("VegetableBamboo", updatedFood.getFoodCode());
+        assertEquals("Bamboo", updatedFood.getName());
+        assertEquals("Vegetable", updatedFood.getCategory());
+        assertEquals("China", updatedFood.getOrigin());
+        assertEquals("20 units", updatedFood.getServingSize());
+        assertEquals(600, updatedFood.getStock());
+
+        verify(foodRepository, times(1)).findById(1L);
+        verify(foodRepository, times(1)).save(any(Food.class));
+    }
+    @Test
+    public void testUpdateFood_Failure() {
+        // Arrange
+        FoodRequest foodToUpdate = new FoodRequest("Bamboo", "VegetableBamboo", "Vegetable", "20 units", "China", 600);
+
+        when(foodRepository.findById(1L)).thenReturn(Optional.empty());
+
+        // Act
+        FoodResponse updatedFood = foodService.updateFood(1L, foodToUpdate);
+
+        // Assert
+        assertNull(updatedFood);
+
+        verify(foodRepository, times(1)).findById(1L);
+        verify(foodRepository, never()).save(any(Food.class));
     }
     @Test
     public void testUpdateStock_PostiveUpdate() {

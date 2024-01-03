@@ -49,6 +49,22 @@ public class FoodService {
         return mapToFoodResponse(food);
     }
 
+    public FoodResponse updateFood(long foodId, FoodRequest updateFood) {
+        Optional<Food> foodOptional = foodRepository.findById(foodId);
+        if(foodOptional.isPresent()) {
+            Food food = foodOptional.get();
+            food.setFoodCode(updateFood.getFoodCode());
+            food.setName(updateFood.getName());
+            food.setCategory(updateFood.getCategory());
+            food.setOrigin(updateFood.getOrigin());
+            food.setServingSize(updateFood.getServingSize());
+            food.setStock(updateFood.getStock());
+            foodRepository.save(food);
+            return mapToFoodResponse(food);
+        }
+        return null;
+    }
+
     public FoodResponse updateStock(Long foodId, int amount) {
         Optional<Food> foodOptional = foodRepository.findById(foodId);
         if(foodOptional.isPresent()) {
