@@ -82,14 +82,19 @@ public class AnimalService {
     private AnimalResponse mapToAnimalResponse(Animal animal) {
         FoodResponse foodResponse = null;
 
-        FoodResponse[] foodResponseArray = webClient.get()
-                .uri("http://" + foodServiceBaseUrl + "/api/food/" + animal.getCodePreferredFood())
-                .retrieve()
-                .bodyToMono(FoodResponse[].class)
-                .block();
-        // assign only when food is found
-        if (foodResponseArray != null && foodResponseArray.length > 0) {
-            foodResponse = foodResponseArray[0];
+        String foodCodeQueryParameter = animal.getCodePreferredFood();
+
+        //only request from the food service if food code is not an empty string (would call all food endpoint)
+        if(foodCodeQueryParameter != null && !foodCodeQueryParameter.equals("")) {
+            FoodResponse[] foodResponseArray = webClient.get()
+                    .uri("http://" + foodServiceBaseUrl + "/api/food/" + foodCodeQueryParameter)
+                    .retrieve()
+                    .bodyToMono(FoodResponse[].class)
+                    .block();
+            // assign only when food is found
+            if (foodResponseArray != null && foodResponseArray.length > 0) {
+                foodResponse = foodResponseArray[0];
+            }
         }
 
         return AnimalResponse.builder()
