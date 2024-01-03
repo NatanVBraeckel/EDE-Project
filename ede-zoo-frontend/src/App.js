@@ -15,6 +15,7 @@ import Animal from './components/animal';
 import { library } from '@fortawesome/fontawesome-svg-core'
 // import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faPenToSquare, faXmark, faTrashCan, faCubesStacked, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import AnimalDetail from './components/animal-detail';
 
 library.add(faPenToSquare, faXmark, faTrashCan, faCubesStacked, faChevronLeft)
 
@@ -91,7 +92,7 @@ function Main() {
       </Route>
       <Route path={'/animal'} element={<Outlet />}>
         <Route index element={<Animal />}/>
-        {/* <Route path={':id'} element={<AnimalDetail />}/> */}
+        <Route path={':id'} element={<AnimalDetail />}/>
       </Route>
       <Route path={'/enclosure'} element={<Outlet />}>
         <Route index element={<Enclosure />}/>
