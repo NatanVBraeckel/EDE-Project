@@ -7,3 +7,38 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+h2 {
+  margin-bottom: 2rem;
+}
+
+.card {
+  position: relative;
+  background-color: #fcfcfc;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  padding: 2rem;
+  border-radius: 5px;
+  flex: 0 0 500px;
+}
+
+label {
+  display: block;
+  width: fit-content;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+input {
+  border-radius: 5px;
+  padding: 10px 5px;
+  font-size: 1rem;
+  border: 1px solid #aaa;
+}
+
+.form-label-group {
+  margin-bottom: 1rem;
+}
+
+.container {
+  margin: 2rem;
+}

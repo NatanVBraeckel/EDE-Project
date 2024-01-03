@@ -11,6 +11,13 @@ import { jwtState, userState } from './store';
 import Enclosure from './components/enclosure';
 import Animal from './components/animal';
 
+//fontawesome
+import { library } from '@fortawesome/fontawesome-svg-core'
+// import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faPenToSquare, faXmark, faTrashCan, faCubesStacked } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faPenToSquare, faXmark, faTrashCan, faCubesStacked)
+
 function NavBar() {
 
   const setJwt = useSetRecoilState(jwtState);
