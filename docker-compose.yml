@@ -67,7 +67,7 @@ services:
     - food-service
     - animal-service
     - enclosure-service
-  image: natanvanbraeckel/api-gateway-new:latest
+  image: natanvanbraeckel/api-gateway-cors:latest
   ports:
     - 8083:8083
   environment:
