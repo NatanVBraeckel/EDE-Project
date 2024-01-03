@@ -27,7 +27,7 @@ services:
  food-service:
   depends_on:
     - mysql-food
-  image: natanvanbraeckel/food-service:latest
+  image: natanvanbraeckel/food-service-update:latest
   ports:
     - 8081:8081
   environment:
@@ -54,7 +54,7 @@ services:
   depends_on:
     - mongo-enclosure
     - animal-service
-  image: natanvanbraeckel/enclosure-service-nulls:latest
+  image: natanvanbraeckel/enclosure-service-update:latest
   ports:
     - 8080:8080
   environment:
@@ -67,7 +67,7 @@ services:
     - food-service
     - animal-service
     - enclosure-service
-  image: natanvanbraeckel/api-gateway-cors:latest
+  image: natanvanbraeckel/api-gateway-update:latest
   ports:
     - 8083:8083
   environment:
