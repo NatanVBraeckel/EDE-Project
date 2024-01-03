@@ -1,6 +1,4 @@
 {
     "zooBaseUrl": "https://api-gateway-natanvbraeckel.cloud.okteto.net",
-    "clientId": "865547574807-1g0m8e4nekotfl7fhmb1q02k0ujv4q99.apps.googleusercontent.com",
-    "clientSecret": "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",
-    "authServer": "https://accounts.google.com/o/oauth2/auth"
+    "clientId": "865547574807-1g0m8e4nekotfl7fhmb1q02k0ujv4q99.apps.googleusercontent.com"
 }

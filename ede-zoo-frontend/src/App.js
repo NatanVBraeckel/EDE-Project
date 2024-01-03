@@ -1,15 +1,33 @@
-import { Outlet, Routes, Route, BrowserRouter, Link, NavLink } from 'react-router-dom';
+import { Outlet, Routes, Route, BrowserRouter, NavLink } from 'react-router-dom';
 import './App.css';
 import Home from './components/home';
 import Food from './components/food';
 import FoodDetail from './components/food-detail';
 import { useEffect } from 'react';
 import ConfigData from './config.json';
+import { RecoilRoot, useRecoilState, useSetRecoilState } from 'recoil';
+import { jwtDecode } from 'jwt-decode';
+import { jwtState, userState } from './store';
 
 function NavBar() {
 
+  const setJwt = useSetRecoilState(jwtState);
+  const [user, setUser] = useRecoilState(userState);
+
   function handleCallbackResponse(response) {
     console.log("Encoded JWT ID token:", response.credential);
+    setJwt(response.credential);
+
+    var userObject = jwtDecode(response.credential);
+    console.log(userObject);
+    setUser(userObject);
+    document.getElementById('signInDiv').hidden = true;
+  }
+
+  function handleSignOut(event) {
+    setJwt('');
+    setUser({});
+    document.getElementById('signInDiv').hidden = false;
   }
 
   useEffect(() => {
@@ -28,11 +46,26 @@ function NavBar() {
   return (
     <nav>
       <ul>
-        <li><NavLink to={"/"} className={"nav-link"}>Home</NavLink></li>
-        <li><NavLink to={"/food"} className={"nav-link"}>Food</NavLink></li>
-        <li><NavLink to={"/animal"} className={"nav-link"}>Animals</NavLink></li>
-        <li><NavLink to={"/enclosure"} className={"nav-link"}>Enclosures</NavLink></li>
-        <li><div id='signInDiv'></div></li>
+        <div className='links'>
+          <li><NavLink to={"/"} className={"nav-link"}>Home</NavLink></li>
+          <li><NavLink to={"/food"} className={"nav-link"}>Food</NavLink></li>
+          <li><NavLink to={"/animal"} className={"nav-link"}>Animals</NavLink></li>
+          <li><NavLink to={"/enclosure"} className={"nav-link"}>Enclosures</NavLink></li>
+        </div>
+        <div>
+          { Object.keys(user).length !== 0 &&
+            <div className='user-logged-in'>
+              <li>
+                <div className='user-info'>
+                  <img src={user.picture}></img>
+                  <p>{ user.name }</p>
+                </div>
+              </li>
+              <li><button onClick={ (e) => handleSignOut(e) }>Sign out</button></li>
+            </div>
+          }
+          <li><div id='signInDiv'></div></li>
+        </div>
       </ul>
     </nav>
   )
@@ -54,10 +87,12 @@ function Main() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <NavBar></NavBar>
-      <Main></Main>
-    </BrowserRouter>
+    <RecoilRoot>
+      <BrowserRouter>
+        <NavBar></NavBar>
+        <Main></Main>
+      </BrowserRouter>
+    </RecoilRoot>
   );
 }
 

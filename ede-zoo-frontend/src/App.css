@@ -1,11 +1,35 @@
 ul {
   display: flex;
-  list-style: none;
-  gap: 2rem;
+  justify-content: space-between;
   background-color: #eee;
   border-bottom: 1px solid gray;
   padding: 1rem;
+  list-style: none;
+  align-items: center;
 }
+
+ul .links {
+  display: flex;
+  gap: 2rem;
+}
+
+button {
+  padding: .5rem;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+  border: 1px solid #DADCE0;
+  font-size: .9rem;
+}
+
+button:hover {
+  background-color: F8FAFF;
+  border: 1px solid #D2E3FC;
+}
+
+/* li:nth-last-child(-n+2) {
+  margin-left: auto;
+} */
 
 .nav-link {
   text-decoration: none;
@@ -14,4 +38,22 @@ ul {
 
 .nav-link:hover {
   border-bottom: 2px solid black;
+}
+
+.user-logged-in {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+img {
+  border-radius: 50px;
+  height: 2.5rem;
+  width: auto;
 }
