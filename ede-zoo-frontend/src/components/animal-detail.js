@@ -14,7 +14,7 @@ function AnimalDetail() {
     const [type, setType] = useState('');
     const [animalCode, setAnimalCode] = useState('');
     const [birthDate, setBirthDate] = useState('');
-    const [codePreferredFood, setCodePrefferedFood] = useState('');
+    const [codePreferredFood, setCodePreferredFood] = useState('');
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     
@@ -48,11 +48,16 @@ function AnimalDetail() {
 
     const getAnimalData = async () => {
         let result = await AnimalApi.getAnimalById(id);
-        setName(result.data[0].name)
-        setType(result.data[0].type)
-        setAnimalCode(result.data[0].animalCode)
-        setBirthDate(result.data[0].birthDate)
-        setCodePrefferedFood(result.data[0].codePreferredFood)
+        console.log("result get by id ", result.data);
+        setName(result.data[0].name);
+        setType(result.data[0].type);
+        setAnimalCode(result.data[0].animalCode);
+        if (result.data[0].birthDate === null) {
+            setBirthDate('');
+          } else {
+            setBirthDate(result.data[0].birthDate);
+          }
+        setCodePreferredFood(result.data[0].codePreferredFood);
     }
 
     useEffect(() => {
@@ -90,7 +95,7 @@ function AnimalDetail() {
                 </div>
                 <div className="form-label-group">
                     <label htmlFor="codePreferredFood">Preferred food code:</label>
-                    <input type="text" id="codePreferredFood" value={codePreferredFood} onChange={(e) => setCodePrefferedFood(e.target.value)} />
+                    <input type="text" id="codePreferredFood" value={codePreferredFood} onChange={(e) => setCodePreferredFood(e.target.value)} />
                 </div>
                 <button type="submit" disabled={isSubmitting}>{id === '0' ? 'Create' : 'Update'}</button>
             </form>
