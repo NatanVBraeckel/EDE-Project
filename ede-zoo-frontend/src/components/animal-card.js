@@ -2,8 +2,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { jwtState } from "../store";
+import FoodCard from "./food-card";
+import AnimalApi from "../api/animal-api";
 
-function AnimalCard({ animal, deleteAnimal }) {
+function AnimalCard({ animal, afterApiRequest }) {
     const jwtToken = useRecoilValue(jwtState);
 
     const style = {
@@ -19,6 +21,16 @@ function AnimalCard({ animal, deleteAnimal }) {
         label: {
             fontWeight: 'bold',
         },
+    }
+    
+    async function deleteAnimal(id, jwtToken) {
+        console.log("deleting animal with id:", id);
+        try {
+            await AnimalApi.deleteAnimal(id, jwtToken);
+        } catch {
+            console.warn("Something went wrong with animal delete");
+        }
+        afterApiRequest();
     }
 
     return (
@@ -39,6 +51,12 @@ function AnimalCard({ animal, deleteAnimal }) {
             <div style={style.propertyDiv}>
                 <p style={style.label}>Code preferred food:</p>
                 <p style={style.property}>{ animal.codePreferredFood }</p>
+            </div>
+            <div style={style.propertyDiv}>
+                <p style={{...style.label, marginBottom: '.2rem'}}>Preferred food: </p>
+                { animal.preferredFood != null &&
+                    <FoodCard food={animal.preferredFood} afterApiRequest={afterApiRequest}></FoodCard>
+                }
             </div>
             { jwtToken !== "" &&
             <div style={{ position: 'absolute', gap: '.6rem', top: '.5rem', right: '5px', display: 'flex' }}>

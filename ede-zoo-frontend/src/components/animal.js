@@ -34,19 +34,9 @@ function Animal() {
         getAllAnimals();
     }, [])
 
-    async function deleteAnimal(id, jwtToken) {
-        console.log("deleting animal with id:", id);
-        try {
-            await AnimalApi.deleteAnimal(id, jwtToken);
-        } catch {
-            console.warn("Something went wrong with animal delete");
-        }
-        getAllAnimals();
-    }
-
     const output = animals.map((animal, i) => {
         return (
-            <AnimalCard animal={animal} deleteAnimal={deleteAnimal} key={i}></AnimalCard>
+            <AnimalCard animal={animal} afterApiRequest={getAllAnimals} key={i}></AnimalCard>
         )
     })
 

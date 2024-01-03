@@ -43,7 +43,7 @@ function AnimalDetail() {
         } finally {
             setIsSubmitting(false);
         }
-        navigate('/animal');
+        navigate(-1);
     }
 
     const getAnimalData = async () => {

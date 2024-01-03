@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import './food-card.css'
 import { useRecoilValue } from 'recoil';
 import { jwtState } from '../store';
+import FoodApi from '../api/food-api';
 
-function FoodCard({ food, deleteFood, updateStock }) {
+function FoodCard({ food, afterApiRequest }) {
     const jwtToken = useRecoilValue(jwtState);
 
     const style = {
@@ -30,6 +31,28 @@ function FoodCard({ food, deleteFood, updateStock }) {
         } else {
             console.log("user cancelled prompt");
         }
+    }
+
+    async function deleteFood(id, jwtToken) {
+        console.log("deleting food with id:", id);
+        try {
+            const result = await FoodApi.deleteFood(id, jwtToken);
+            console.log("Deletion result:", result);
+        } catch {
+            console.warn("Something went wrong with food delete");
+        }
+        afterApiRequest();
+    }
+
+    async function updateStock(id, amount, jwtToken) {
+        console.log("updating stock");
+        try {
+            const result = await FoodApi.updateStock(id, amount, jwtToken);
+            console.log("Update result:", result.data);
+        } catch {
+            console.warn("Something went wrong with stock update");
+        }
+        afterApiRequest();
     }
 
     return (

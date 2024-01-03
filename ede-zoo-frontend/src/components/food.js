@@ -31,37 +31,13 @@ function Food() {
         }
     }
 
-    async function deleteFood(id, jwtToken) {
-        console.log("deleting food with id:", id);
-        try {
-            const result = await FoodApi.deleteFood(id, jwtToken);
-            console.log("Deletion result:", result);
-        } catch {
-            console.warn("Something went wrong with food delete");
-        }
-        console.log("parent deleted food");
-        getAllFood();
-    }
-
-    async function updateStock(id, amount, jwtToken) {
-        console.log("updating stock");
-        try {
-            const result = await FoodApi.updateStock(id, amount, jwtToken);
-            console.log("Update result:", result.data);
-        } catch {
-            console.warn("Something went wrong with stock update");
-        }
-        console.log("parent updated stock");
-        getAllFood();
-    }
-
     useEffect(() => {
         getAllFood();
     }, []);
 
     const output = food.map((food, i) => {
         return (
-            <FoodCard food={food} deleteFood={deleteFood} updateStock={updateStock} key={i} style={style.foodCard}></FoodCard>
+            <FoodCard food={food} afterApiRequest={getAllFood} key={i} style={style.foodCard}></FoodCard>
         )
     })
 

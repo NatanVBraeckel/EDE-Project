@@ -46,7 +46,7 @@ function FoodDetail() {
         } finally {
             setIsSubmitting(false);
         }
-        navigate('/food');
+        navigate(-1);
     }
 
     const getFoodData = async () => {
