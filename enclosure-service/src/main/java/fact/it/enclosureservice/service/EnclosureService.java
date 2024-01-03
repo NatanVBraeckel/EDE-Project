@@ -55,6 +55,21 @@ public class EnclosureService {
         return enclosures.stream().map(this::mapToEnclosureResponse).toList();
     }
 
+    public EnclosureResponse updateEnclosure(String enclosureId, EnclosureRequest updateEnclosure) {
+        Optional<Enclosure> enclosureOptional = enclosureRepository.findById(enclosureId);
+        if(enclosureOptional.isPresent()) {
+            Enclosure enclosure = enclosureOptional.get();
+            enclosure.setEnclosureCode(updateEnclosure.getEnclosureCode());
+            enclosure.setName(updateEnclosure.getName());
+            enclosure.setType(updateEnclosure.getType());
+            enclosure.setAnimalCodes(updateEnclosure.getAnimalCodes());
+            enclosure.setSize(updateEnclosure.getSize());
+            enclosureRepository.save(enclosure);
+            return mapToEnclosureResponse(enclosure);
+        }
+        return null;
+    }
+
     public boolean deleteEnclosure(String enclosureId) {
         Optional<Enclosure> enclosureOptional = enclosureRepository.findById(enclosureId);
         if(enclosureOptional.isPresent()) {

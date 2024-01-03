@@ -50,6 +50,13 @@ spring:
             - Path=/food/{foodCode}
           filters:
             - SetPath=/api/food/{foodCode}
+        - id: food-service-update
+          uri: http://${FOOD_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/food/{foodId}
+            - Method=PUT
+          filters:
+            - SetPath=/api/food/{foodId}
         - id: food-service-update-stock
           uri: http://${FOOD_SERVICE_BASEURL:localhost:8081}
           predicates:
@@ -130,6 +137,13 @@ spring:
             - Path=/enclosure/{enclosureCode}
           filters:
             - SetPath=/api/enclosure/{enclosureCode}
+        - id: enclosure-service-update
+          uri: http://${ENCLOSURE_SERVICE_BASEURL:localhost:8080}
+          predicates:
+            - Path=/enclosure/{enclosureId}
+            - Method=PUT
+          filters:
+            - SetPath=/api/enclosure/{enclosureId}
         - id: enclosure-service-delete
           uri: http://${ENCLOSURE_SERVICE_BASEURL:localhost:8080}
           predicates:
