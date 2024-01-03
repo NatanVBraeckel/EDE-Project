@@ -9,14 +9,14 @@ body {
 }
 
 h2 {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .card {
   position: relative;
   background-color: #fcfcfc;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 5px;
   flex: 0 0 500px;
 }

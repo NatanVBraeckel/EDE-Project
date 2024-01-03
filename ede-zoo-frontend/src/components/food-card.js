@@ -7,6 +7,21 @@ import { jwtState } from '../store';
 function FoodCard({ food, deleteFood, updateStock }) {
     const jwtToken = useRecoilValue(jwtState);
 
+    const style = {
+        name: {
+            fontSize: "1.5rem"
+        },
+        propertyDiv: {
+            marginBlock: '.8rem',
+        },
+        property: {
+            fontSize: "1.2rem"
+        },
+        label: {
+            fontWeight: 'bold',
+        },
+    }
+
     function handleStock() {
         const input = window.prompt("With how much would you like to increase/decrease stock?", "")
         if(input !== null) {
@@ -19,14 +34,29 @@ function FoodCard({ food, deleteFood, updateStock }) {
 
     return (
         <section className="card">
-            <h4>{ food.name }</h4>
-            <p>{ food.category }</p>
-            <p>{ food.foodCode }</p>
-            <p>{ food.origin }</p>
-            <p>{ food.servingSize }</p>
-            <p>{ food.stock }</p>
+            <h4 style={style.name}>{ food.name }</h4>
+            <div style={style.propertyDiv}>
+                <p style={style.label}>Category: </p>
+                <p style={style.property}>{ food.category }</p>
+            </div>
+            <div style={style.propertyDiv}>
+                <p style={style.label}>Food code:</p>
+                <p style={style.property}>{ food.foodCode }</p>
+            </div>
+            <div style={style.propertyDiv}>
+                <p style={style.label}>Food origin:</p>
+                <p style={style.property}>{ food.origin }</p>
+            </div>
+            <div style={style.propertyDiv}>
+                <p style={style.label}>Serving size:</p>
+                <p style={style.property}>{ food.servingSize }</p>
+            </div>
+            <div style={{...style.propertyDiv, position: 'absolute', bottom: '1rem', right: '1rem'}}>
+                <p style={style.label}>Stock:</p>
+                <p style={style.property}>{ food.stock } units in stock</p>
+            </div>
             { jwtToken !== "" &&
-            <div>
+            <div style={{ position: 'absolute', gap: '.6rem', top: '.5rem', right: '5px', display: 'flex' }}>
                 <button className='button stockButton' onClick={() => handleStock()}>
                     <FontAwesomeIcon icon="cubes-stacked"></FontAwesomeIcon>
                 </button>

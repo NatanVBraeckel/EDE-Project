@@ -1,21 +1,15 @@
 .button {
-    position: absolute;
-    top: 5px;
-    right: 5px;
     color: gray;
     border: none;
     background: none;
     padding: 5px;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
 }
 .button:hover {
     border: none;
     background: none;
 }
 
-.editButton {
-    right: 30px
-}
 .editButton:hover, .stockButton:hover {
     color: navy;
 }
@@ -24,7 +18,4 @@
     color: crimson;
 }
 
-.stockButton {
-    right: 60px;
-}
 

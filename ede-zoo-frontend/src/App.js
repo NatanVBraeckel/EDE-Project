@@ -14,9 +14,9 @@ import Animal from './components/animal';
 //fontawesome
 import { library } from '@fortawesome/fontawesome-svg-core'
 // import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faPenToSquare, faXmark, faTrashCan, faCubesStacked } from '@fortawesome/free-solid-svg-icons'
+import { faPenToSquare, faXmark, faTrashCan, faCubesStacked, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faPenToSquare, faXmark, faTrashCan, faCubesStacked)
+library.add(faPenToSquare, faXmark, faTrashCan, faCubesStacked, faChevronLeft)
 
 function NavBar() {
 

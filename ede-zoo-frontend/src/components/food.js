@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import FoodApi from "../api/food-api";
 import FoodCard from './food-card';
+import { Link } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { jwtState } from "../store";
 
 function Food() {
+    const jwtToken = useRecoilValue(jwtState);
+
     const style = {
         container: {
             margin: '2rem',
@@ -63,6 +68,13 @@ function Food() {
     return (
         <div style={style.container}>
             <h2>Food</h2>
+            { jwtToken !== '' &&
+                <Link to={'/food/0'}>
+                    <button style={{ marginBottom: '1rem' }}>
+                        New food
+                    </button>
+                </Link>
+            }
             <div style={style.list}>{ output }</div>
         </div>
     )
