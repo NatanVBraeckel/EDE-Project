@@ -6,13 +6,13 @@ metadata:
     kompose.version: 1.26.0 (40646f47)
   creationTimestamp: null
   labels:
-    io.kompose.service: mongo-enclosure
+    ede.natanvb: mongo-enclosure
   name: mongo-enclosure
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: mongo-enclosure
+      ede.natanvb: mongo-enclosure
   strategy:
     type: Recreate
   template:
@@ -22,7 +22,7 @@ spec:
         kompose.version: 1.26.0 (40646f47)
       creationTimestamp: null
       labels:
-        io.kompose.service: mongo-enclosure
+        ede.natanvb: mongo-enclosure
     spec:
       containers:
         - image: mongo:latest

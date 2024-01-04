@@ -6,7 +6,7 @@ metadata:
     kompose.version: 1.26.0 (40646f47)
   creationTimestamp: null
   labels:
-    io.kompose.service: mysql-animal
+    ede.natanvb: mysql-animal
   name: mysql-animal
 spec:
   ports:
@@ -14,6 +14,6 @@ spec:
       port: 3307
       targetPort: 3306
   selector:
-    io.kompose.service: mysql-animal
+    ede.natanvb: mysql-animal
 status:
   loadBalancer: {}

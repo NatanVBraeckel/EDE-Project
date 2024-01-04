@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   creationTimestamp: null
   labels:
-    io.kompose.service: mongodb-enclosure-data
+    ede.natanvb: mongodb-enclosure-data
   name: mongodb-enclosure-data
 spec:
   accessModes:

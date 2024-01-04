@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   creationTimestamp: null
   labels:
-    io.kompose.service: mysql-food-data
+    ede.natanvb: mysql-food-data
   name: mysql-food-data
 spec:
   accessModes:

@@ -6,13 +6,13 @@ metadata:
     kompose.version: 1.26.0 (40646f47)
   creationTimestamp: null
   labels:
-    io.kompose.service: api-gateway
+    ede.natanvb: api-gateway
   name: api-gateway
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: api-gateway
+      ede.natanvb: api-gateway
   strategy: {}
   template:
     metadata:
@@ -21,7 +21,7 @@ spec:
         kompose.version: 1.26.0 (40646f47)
       creationTimestamp: null
       labels:
-        io.kompose.service: api-gateway
+        ede.natanvb: api-gateway
     spec:
       containers:
         - env:

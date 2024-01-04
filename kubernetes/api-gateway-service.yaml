@@ -6,7 +6,7 @@ metadata:
     kompose.version: 1.26.0 (40646f47)
   creationTimestamp: null
   labels:
-    io.kompose.service: api-gateway
+    ede.natanvb: api-gateway
   name: api-gateway
 spec:
   ports:
@@ -15,7 +15,7 @@ spec:
       targetPort: 8083
       nodePort: 30001
   selector:
-    io.kompose.service: api-gateway
+    ede.natanvb: api-gateway
   type: NodePort
 status:
   loadBalancer: {}

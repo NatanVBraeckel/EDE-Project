@@ -6,7 +6,7 @@ metadata:
     kompose.version: 1.26.0 (40646f47)
   creationTimestamp: null
   labels:
-    io.kompose.service: mongo-enclosure
+    ede.natanvb: mongo-enclosure
   name: mongo-enclosure
 spec:
   ports:
@@ -14,6 +14,6 @@ spec:
       port: 27017
       targetPort: 27017
   selector:
-    io.kompose.service: mongo-enclosure
+    ede.natanvb: mongo-enclosure
 status:
   loadBalancer: {}

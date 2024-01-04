@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   creationTimestamp: null
   labels:
-    io.kompose.service: mysql-animal-data
+    ede.natanvb: mysql-animal-data
   name: mysql-animal-data
 spec:
   accessModes:
