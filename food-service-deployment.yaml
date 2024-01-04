@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: food-service
+  name: food-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: food-service
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: food-service
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_DB_HOST
+              value: mysql-food
+            - name: MYSQL_DB_PASSWORD
+              value: abc123
+            - name: MYSQL_DB_PORT
+              value: "3308"
+            - name: MYSQL_DB_USERNAME
+              value: root
+          image: natanvanbraeckel/food-service-update:latest
+          name: food-service
+          ports:
+            - containerPort: 8081
+          resources: {}
+      restartPolicy: Always
+status: {}

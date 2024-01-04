@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: animal-service
+  name: animal-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: animal-service
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: animal-service
+    spec:
+      containers:
+        - env:
+            - name: FOOD_SERVICE_BASEURL
+              value: food-service:8081
+            - name: MYSQL_DB_HOST
+              value: mysql-animal
+            - name: MYSQL_DB_PASSWORD
+              value: abc123
+            - name: MYSQL_DB_PORT
+              value: "3307"
+            - name: MYSQL_DB_USERNAME
+              value: root
+          image: natanvanbraeckel/animal-service-emptyfc:latest
+          name: animal-service
+          ports:
+            - containerPort: 8082
+          resources: {}
+      restartPolicy: Always
+status: {}
