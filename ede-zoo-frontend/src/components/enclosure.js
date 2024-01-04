@@ -1,34 +1,58 @@
 import { useEffect, useState } from "react";
 import EnclosureApi from "../api/enclosure-api";
+import EnclosureCard from "./enclosure-card";
+import { Link } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { jwtState } from "../store";
 
 function Enclosure() {
     const [enclosures, setEnclosures] = useState([]);
+    const jwtToken = useRecoilValue(jwtState);
+
+    const style = {
+        container: {
+            margin: '2rem',
+        },
+        list: {
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '2rem'
+        },
+    }
+
+    const getAllEnclosures = async () => {
+        try {
+            const result = await EnclosureApi.getAllEnclosures();
+            console.log("Result enclosure:", result.data);
+            setEnclosures(result.data);
+        } catch {
+            console.warn("Something went wrong with the all enclosures call");
+        }
+    }
 
     useEffect(() => {
-        const getAllEnclosures = async () => {
-            try {
-                const result = await EnclosureApi.getAllEnclosures();
-                console.log("Result enclosure:", result.data);
-                setEnclosures(result.data);
-            } catch {
-                console.warn("Something went wrong with the all enclosures call");
-            }
-        }
         getAllEnclosures();
     }, []);
 
     const output = enclosures.map((enclosure, i) => {
         return (
-            <div key={i}>
-                { enclosure.name }
-            </div>
+            <EnclosureCard key={i} enclosure={enclosure} afterApiRequest={getAllEnclosures}></EnclosureCard>
         )
     })
 
     return (
-        <div>
+        <div style={style.container}>
             <h2>Enclosures</h2>
-            <div>{ output }</div>
+            { jwtToken !== '' &&
+                <Link to={'/enclosure/0'}>
+                    <button style={{ marginBottom: '1rem' }}>
+                        New enclosure
+                    </button>
+                </Link>
+            }
+            <div style={style.list}>
+                { output }
+            </div>
         </div>
     )
 }
