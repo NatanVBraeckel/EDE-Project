@@ -1,3 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    ede.natanvb: enclosure-service
+  name: enclosure-service
+spec:
+  ports:
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
+  selector:
+    ede.natanvb: enclosure-service
+status:
+  loadBalancer: {}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
