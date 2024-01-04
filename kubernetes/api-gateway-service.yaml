@@ -13,6 +13,7 @@ spec:
     - name: "8083"
       port: 8083
       targetPort: 8083
+      nodePort: 30001
   selector:
     io.kompose.service: api-gateway
 status:
