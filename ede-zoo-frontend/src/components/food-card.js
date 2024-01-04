@@ -56,7 +56,7 @@ function FoodCard({ food, afterApiRequest }) {
     }
 
     return (
-        <section className="card">
+        <section className="card" style={{ backgroundColor: '#eeeeee'}}>
             <h4 style={style.name}>{ food.name }</h4>
             <div style={style.propertyDiv}>
                 <p style={style.label}>Category: </p>

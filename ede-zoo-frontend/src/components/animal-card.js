@@ -34,7 +34,7 @@ function AnimalCard({ animal, afterApiRequest }) {
     }
 
     return (
-        <section className="card">
+        <section className="card" style={{ backgroundColor: '#e7e7e7' }}>
             <h4 style={style.name}>{ animal.name }</h4>
             <div style={style.propertyDiv}>
                 <p style={style.label}>Type:</p>

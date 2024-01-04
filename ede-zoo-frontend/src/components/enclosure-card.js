@@ -50,7 +50,7 @@ function EnclosureCard({ enclosure, afterApiRequest }) {
     }
 
     return (
-        <section className="card" style={{ backgroundColor: "lightblue", flexGrow: "1", flexBasis: "800px" }}>
+        <section className="card" style={{ backgroundColor: "#e0e0e0", flexGrow: "1", flexBasis: "800px" }}>
             <h4 style={style.name}>{ enclosure.name }</h4>
             <div style={style.propertyDiv}>
                 <p style={style.label}>Type:</p>
