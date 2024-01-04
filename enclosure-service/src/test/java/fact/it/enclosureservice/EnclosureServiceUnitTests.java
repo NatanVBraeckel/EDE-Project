@@ -68,9 +68,9 @@ public class EnclosureServiceUnitTests {
         when(enclosureRepository.findAll()).thenReturn(Arrays.asList(enclosure1, enclosure2));
 
         FoodResponse foodResponse = new FoodResponse(1L, "MeatPigFoot", "Pig foot", "Meat", "1 unit", "Germany", 26);
-        AnimalResponse animalResponseNala = new AnimalResponse(1L, "NalaLion2002", "Nala", "Lion", LocalDate.parse("1994-06-15"), foodResponse);
-        AnimalResponse animalResponseSimba = new AnimalResponse(2L, "SimbaLion2016", "Simba", "Lion", LocalDate.parse("2016-02-01"), foodResponse);
-        AnimalResponse animalResponseBaloo = new AnimalResponse(3L, "BalooBear1999", "Baloo", "Bear", LocalDate.parse("1999-10-12"), foodResponse);
+        AnimalResponse animalResponseNala = new AnimalResponse(1L, "NalaLion2002", "Nala", "Lion", LocalDate.parse("1994-06-15"), "MeatPigFoot", foodResponse);
+        AnimalResponse animalResponseSimba = new AnimalResponse(2L, "SimbaLion2016", "Simba", "Lion", LocalDate.parse("2016-02-01"),"MeatPigFoot", foodResponse);
+        AnimalResponse animalResponseBaloo = new AnimalResponse(3L, "BalooBear1999", "Baloo", "Bear", LocalDate.parse("1999-10-12"), "MeatPigFoot", foodResponse);
 
         when(webClient.get()).thenReturn(requestHeadersUriSpec);
 
@@ -128,9 +128,9 @@ public class EnclosureServiceUnitTests {
         when(enclosureRepository.findAllById(Arrays.asList("6542c800712e1a7c6a3e77e5", "7864b511784a5c8r6b5e84b6"))).thenReturn(Arrays.asList(enclosure1, enclosure2));
 
         FoodResponse foodResponse = new FoodResponse(1L, "MeatPigFoot", "Pig foot", "Meat", "1 unit", "Germany", 26);
-        AnimalResponse animalResponseNala = new AnimalResponse(1L, "NalaLion2002", "Nala", "Lion", LocalDate.parse("1994-06-15"), foodResponse);
-        AnimalResponse animalResponseSimba = new AnimalResponse(2L, "SimbaLion2016", "Simba", "Lion", LocalDate.parse("2016-02-01"), foodResponse);
-        AnimalResponse animalResponseBaloo = new AnimalResponse(3L, "BalooBear1999", "Baloo", "Bear", LocalDate.parse("1999-10-12"), foodResponse);
+        AnimalResponse animalResponseNala = new AnimalResponse(1L, "NalaLion2002", "Nala", "Lion", LocalDate.parse("1994-06-15"),"MeatPigFoot", foodResponse);
+        AnimalResponse animalResponseSimba = new AnimalResponse(2L, "SimbaLion2016", "Simba", "Lion", LocalDate.parse("2016-02-01"),"MeatPigFoot", foodResponse);
+        AnimalResponse animalResponseBaloo = new AnimalResponse(3L, "BalooBear1999", "Baloo", "Bear", LocalDate.parse("1999-10-12"),"MeatPigFoot", foodResponse);
 
         when(webClient.get()).thenReturn(requestHeadersUriSpec);
 
@@ -188,9 +188,9 @@ public class EnclosureServiceUnitTests {
         when(enclosureRepository.findAllByEnclosureCodeIn(Arrays.asList("MediumSavannahLion", "SmallForestBear"))).thenReturn(Arrays.asList(enclosure1, enclosure2));
 
         FoodResponse foodResponse = new FoodResponse(1L, "MeatPigFoot", "Pig foot", "Meat", "1 unit", "Germany", 26);
-        AnimalResponse animalResponseNala = new AnimalResponse(1L, "NalaLion2002", "Nala", "Lion", LocalDate.parse("1994-06-15"), foodResponse);
-        AnimalResponse animalResponseSimba = new AnimalResponse(2L, "SimbaLion2016", "Simba", "Lion", LocalDate.parse("2016-02-01"), foodResponse);
-        AnimalResponse animalResponseBaloo = new AnimalResponse(3L, "BalooBear1999", "Baloo", "Bear", LocalDate.parse("1999-10-12"), foodResponse);
+        AnimalResponse animalResponseNala = new AnimalResponse(1L, "NalaLion2002", "Nala", "Lion", LocalDate.parse("1994-06-15"),"MeatPigFoot", foodResponse);
+        AnimalResponse animalResponseSimba = new AnimalResponse(2L, "SimbaLion2016", "Simba", "Lion", LocalDate.parse("2016-02-01"),"MeatPigFoot", foodResponse);
+        AnimalResponse animalResponseBaloo = new AnimalResponse(3L, "BalooBear1999", "Baloo", "Bear", LocalDate.parse("1999-10-12"),"MeatPigFoot", foodResponse);
 
         when(webClient.get()).thenReturn(requestHeadersUriSpec);
 
@@ -244,8 +244,8 @@ public class EnclosureServiceUnitTests {
                 EnclosureSize.Large, EnclosureType.Savannah, Arrays.asList("NalaLion2002", "SimbaLion2016"));
 
         FoodResponse foodResponse = new FoodResponse(1L, "MeatPigFoot", "Pig foot", "Meat", "1 unit", "Germany", 26);
-        AnimalResponse animalResponseNala = new AnimalResponse(1L, "NalaLion2002", "Nala", "Lion", LocalDate.parse("1994-06-15"), foodResponse);
-        AnimalResponse animalResponseSimba = new AnimalResponse(2L, "SimbaLion2016", "Simba", "Lion", LocalDate.parse("2016-02-01"), foodResponse);
+        AnimalResponse animalResponseNala = new AnimalResponse(1L, "NalaLion2002", "Nala", "Lion", LocalDate.parse("1994-06-15"),"MeatPigFoot", foodResponse);
+        AnimalResponse animalResponseSimba = new AnimalResponse(2L, "SimbaLion2016", "Simba", "Lion", LocalDate.parse("2016-02-01"),"MeatPigFoot", foodResponse);
 
         when(webClient.get()).thenReturn(requestHeadersUriSpec);
         when(requestHeadersUriSpec.uri("http://localhost:8082/api/animal/NalaLion2002,SimbaLion2016"))
@@ -282,8 +282,8 @@ public class EnclosureServiceUnitTests {
                 "Lion Forest", EnclosureSize.Large, EnclosureType.Forest, Arrays.asList("NalaLion2002", "SimbaLion2016"));
 
         FoodResponse foodResponse = new FoodResponse(1L, "MeatPigFoot", "Pig foot", "Meat", "1 unit", "Germany", 26);
-        AnimalResponse animalResponseNala = new AnimalResponse(1L, "NalaLion2002", "Nala", "Lion", LocalDate.parse("1994-06-15"), foodResponse);
-        AnimalResponse animalResponseSimba = new AnimalResponse(2L, "SimbaLion2016", "Simba", "Lion", LocalDate.parse("2016-02-01"), foodResponse);
+        AnimalResponse animalResponseNala = new AnimalResponse(1L, "NalaLion2002", "Nala", "Lion", LocalDate.parse("1994-06-15"),"MeatPigFoot", foodResponse);
+        AnimalResponse animalResponseSimba = new AnimalResponse(2L, "SimbaLion2016", "Simba", "Lion", LocalDate.parse("2016-02-01"),"MeatPigFoot", foodResponse);
 
         when(enclosureRepository.findById("6542c800712e1a7c6a3e77e5")).thenReturn(Optional.of(enclosure1));
 
