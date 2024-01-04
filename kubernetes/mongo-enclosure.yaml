@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    ede.natanvb: mongo-enclosure
+  name: mongo-enclosure
+spec:
+  ports:
+    - name: "27017"
+      port: 27017
+      targetPort: 27017
+  selector:
+    ede.natanvb: mongo-enclosure
+status:
+  loadBalancer: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    ede.natanvb: mongo-enclosure
+  name: mongo-enclosure
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      ede.natanvb: mongo-enclosure
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        ede.natanvb: mongo-enclosure
+    spec:
+      containers:
+        - image: mongo:latest
+          name: mongo-enclosure
+          ports:
+            - containerPort: 27017
+          resources: {}
+          volumeMounts:
+            - mountPath: /data/db
+              name: mongodb-enclosure-data
+      restartPolicy: Always
+      volumes:
+        - name: mongodb-enclosure-data
+          persistentVolumeClaim:
+            claimName: mongodb-enclosure-data
+status: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    ede.natanvb: mongodb-enclosure-data
+  name: mongodb-enclosure-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}

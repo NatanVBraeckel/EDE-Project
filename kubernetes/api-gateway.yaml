@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    ede.natanvb: api-gateway
+  name: api-gateway
+spec:
+  ports:
+    - name: "8083"
+      port: 8083
+      targetPort: 8083
+      nodePort: 30001
+  selector:
+    ede.natanvb: api-gateway
+  type: NodePort
+status:
+  loadBalancer: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    ede.natanvb: api-gateway
+  name: api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      ede.natanvb: api-gateway
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        ede.natanvb: api-gateway
+    spec:
+      containers:
+        - env:
+            - name: ANIMAL_SERVICE_BASEURL
+              value: animal-service:8082
+            - name: ENCLOSURE_SERVICE_BASEURL
+              value: enclosure-service:8080
+            - name: FOOD_SERVICE_BASEURL
+              value: food-service:8081
+          image: natanvanbraeckel/api-gateway-frontend2:latest
+          name: api-gateway
+          ports:
+            - containerPort: 8083
+          resources: {}
+      restartPolicy: Always
+status: {}

@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    ede.natanvb: animal-service
+  name: animal-service
+spec:
+  ports:
+    - name: "8082"
+      port: 8082
+      targetPort: 8082
+  selector:
+    ede.natanvb: animal-service
+status:
+  loadBalancer: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    ede.natanvb: animal-service
+  name: animal-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      ede.natanvb: animal-service
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        ede.natanvb: animal-service
+    spec:
+      containers:
+        - env:
+            - name: FOOD_SERVICE_BASEURL
+              value: food-service:8081
+            - name: MYSQL_DB_HOST
+              value: mysql-animal
+            - name: MYSQL_DB_PASSWORD
+              value: abc123
+            - name: MYSQL_DB_PORT
+              value: "3307"
+            - name: MYSQL_DB_USERNAME
+              value: root
+          image: natanvanbraeckel/animal-service-emptyfc:latest
+          name: animal-service
+          ports:
+            - containerPort: 8082
+          resources: {}
+      restartPolicy: Always
+status: {}

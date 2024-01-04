@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    ede.natanvb: enclosure-service
+  name: enclosure-service
+spec:
+  ports:
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
+  selector:
+    ede.natanvb: enclosure-service
+status:
+  loadBalancer: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    ede.natanvb: enclosure-service
+  name: enclosure-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      ede.natanvb: enclosure-service
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        ede.natanvb: enclosure-service
+    spec:
+      containers:
+        - env:
+            - name: ANIMAL_SERVICE_BASEURL
+              value: animal-service:8082
+            - name: MONGODB_HOST
+              value: mongo-enclosure
+            - name: MONGODB_PORT
+              value: "27017"
+          image: natanvanbraeckel/enclosure-service-arf:latest
+          name: enclosure-service
+          ports:
+            - containerPort: 8080
+          resources: {}
+      restartPolicy: Always
+status: {}
