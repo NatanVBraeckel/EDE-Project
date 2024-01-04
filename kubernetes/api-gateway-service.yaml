@@ -16,5 +16,6 @@ spec:
       nodePort: 30001
   selector:
     io.kompose.service: api-gateway
+  type: NodePort
 status:
   loadBalancer: {}
