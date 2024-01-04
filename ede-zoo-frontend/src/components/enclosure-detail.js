@@ -10,6 +10,23 @@ function EnclosureDetail() {
     const {id} = useParams();
     const navigate = useNavigate();
     const jwtToken = useRecoilValue(jwtState);
+    const enclosureTypes = [
+        "Savannah",
+        "Jungle",
+        "Forest",
+        "Desert",
+        "Arctic",
+        "Grassland",
+        "Tundra",
+        "Aviary"
+    ];
+    const enclosureSizes = [
+        "ExtraSmall",
+        "Small",
+        "Medium",
+        "Large",
+        "ExtraLarge",
+    ];
 
     const [name, setName] = useState('');
     const [type, setType] = useState('');
@@ -96,13 +113,35 @@ function EnclosureDetail() {
                     <label htmlFor="name">Name:</label>
                     <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
                 </div>
-                <div className="form-label-group">
+                {/* <div className="form-label-group">
                     <label htmlFor="type">Enclosure type:</label>
                     <input type="text" id="type" value={type} onChange={(e) => setType(e.target.value)} />
-                </div>
+                </div> */}
                 <div className="form-label-group">
+                    <label htmlFor="type">Enclosure type:</label>
+                    <select id="type" value={type} onChange={(e) => setType(e.target.value)}>
+                        <option value="">Select an Enclosure Type</option>
+                        {enclosureTypes.map((type, index) => (
+                        <option key={index} value={type}>
+                            {type}
+                        </option>
+                        ))}
+                    </select>
+                </div>
+                {/* <div className="form-label-group">
                     <label htmlFor="size">Enclosure size:</label>
                     <input type="text" id="size" value={size} onChange={(e) => setSize(e.target.value)} />
+                </div> */}
+                <div className="form-label-group">
+                    <label htmlFor="size">Enclosure size:</label>
+                    <select id="size" value={size} onChange={(e) => setSize(e.target.value)}>
+                        <option value="">Select an Enclosure Size</option>
+                        {enclosureSizes.map((size, index) => (
+                        <option key={index} value={size}>
+                            {size}
+                        </option>
+                        ))}
+                    </select>
                 </div>
                 <div className="form-label-group">
                     <label htmlFor="enclosureCode">Enclosure code:</label>

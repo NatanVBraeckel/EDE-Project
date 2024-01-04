@@ -9,13 +9,44 @@ function AnimalDetail() {
     const {id} = useParams();
     const navigate = useNavigate();
     const jwtToken = useRecoilValue(jwtState);
+    const animalTypes = [
+        'Lion',
+        'Tiger',
+        'Bear',
+        'Elephant',
+        'Giraffe',
+        'Cheetah',
+        'Zebra',
+        'Kangaroo',
+        'Panda',
+        'Gorilla',
+        'Leopard',
+        'Hippo',
+        'Rhino',
+        'Koala',
+        'Penguin',
+        'Dolphin',
+        'Whale',
+        'PolarBear',
+        'Chimpanzee',
+        'Wolf',
+        'Crocodile',
+        'Fox',
+        'Ostrich',
+        'Platypus',
+        'Octopus',
+        'Cobra',
+        'Sloth',
+        'Lemur',
+        'Meerkat'
+    ];
 
     const [name, setName] = useState('');
     const [type, setType] = useState('');
     const [animalCode, setAnimalCode] = useState('');
     const [birthDate, setBirthDate] = useState('');
     const [codePreferredFood, setCodePreferredFood] = useState('');
-
+    
     const [isSubmitting, setIsSubmitting] = useState(false);
     
     async function handleSubmit(event) {
@@ -81,9 +112,20 @@ function AnimalDetail() {
                     <label htmlFor="name">Name:</label>
                     <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
                 </div>
-                <div className="form-label-group">
+                {/* <div className="form-label-group">
                     <label htmlFor="type">Type:</label>
                     <input type="text" id="type" value={type} onChange={(e) => setType(e.target.value)} />
+                </div> */}
+                <div className="form-label-group">
+                    <label htmlFor="type">Animal type:</label>
+                    <select id="type" value={type} onChange={(e) => setType(e.target.value)}>
+                        <option value="">Select an Animal Type</option>
+                        {animalTypes.map((type, index) => (
+                        <option key={index} value={type}>
+                            {type}
+                        </option>
+                        ))}
+                    </select>
                 </div>
                 <div className="form-label-group">
                     <label htmlFor="animalCode">Animal code:</label>

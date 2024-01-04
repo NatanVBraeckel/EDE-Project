@@ -54,7 +54,7 @@ function Enclosure() {
                 </Link>
             }
             <Loader show={loading} />
-            { enclosures.length === 0 && 
+            { enclosures.length === 0 && !loading &&
                 <p>No enclosures</p>
             }
             <div style={style.list}>
