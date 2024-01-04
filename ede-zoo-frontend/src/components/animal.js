@@ -54,6 +54,9 @@ function Animal() {
                 </Link>
             }
             <Loader show={loading} />
+            { animals.length === 0 && 
+                <p>No animals</p>
+            }
             <div style={style.list}>
                 { output }
             </div>

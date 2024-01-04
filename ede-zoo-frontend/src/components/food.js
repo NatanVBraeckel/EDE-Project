@@ -55,6 +55,9 @@ function Food() {
                 </Link>
             }
             <Loader show={loading} />
+            { food.length === 0 && 
+                <p>No food</p>
+            }
             <div style={style.list}>{ output }</div>
         </div>
     )
