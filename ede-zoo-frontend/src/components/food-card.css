@@ -1,0 +1,21 @@
+.button {
+    color: black;
+    border: none;
+    background: none;
+    padding: 5px;
+    font-size: 1.5rem;
+}
+.button:hover {
+    border: none;
+    background: none;
+}
+
+.editButton:hover, .stockButton:hover {
+    color: navy;
+}
+
+.deleteButton:hover {
+    color: crimson;
+}
+
+
