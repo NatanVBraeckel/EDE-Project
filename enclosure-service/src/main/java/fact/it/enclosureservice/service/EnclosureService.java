@@ -86,7 +86,7 @@ public class EnclosureService {
 
         //only request from the animal service if there are animal codes
         //also don't request if there is only one value in the array, being an empty string (would call all animal endpoint)
-        if(animalCodes != null && !animalCodes.isEmpty() && (animalCodes.size() == 1 && !(animalCodes.get(0).equals("")))) {
+        if(animalCodes != null && !animalCodes.isEmpty() && !(animalCodes.size() == 1 && (animalCodes.get(0).equals("")))) {
             String animalCodesQueryParam = String.join(",", animalCodes);
 
             AnimalResponse[] animalResponseArray = webClient.get()
