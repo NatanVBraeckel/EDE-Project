@@ -93,7 +93,10 @@ function AnimalDetail() {
 
     useEffect(() => {
         if(id !== '0') {
+            document.title = "Edit animal";
             getAnimalData();
+        } else {
+            document.title = "Create animal";
         }
     }, []);
 

@@ -94,7 +94,10 @@ function EnclosureDetail() {
 
     useEffect(() => {
         if(id !== '0') {
+            document.title = "Edit enclosure";
             getEnclosureData();
+        } else {
+            document.title = "Create enclosure";
         }
     }, []);
 

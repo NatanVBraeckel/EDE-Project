@@ -58,7 +58,11 @@ function NavBar() {
     <nav>
       <ul>
         <div className='links'>
-          <li><NavLink to={"/"} className={"nav-link"}>Home</NavLink></li>
+          <li>
+            <NavLink to={"/"}>
+              <img src='/aapje.png' />
+            </NavLink>
+          </li>
           <li><NavLink to={"/food"} className={"nav-link"}>Food</NavLink></li>
           <li><NavLink to={"/animal"} className={"nav-link"}>Animals</NavLink></li>
           <li><NavLink to={"/enclosure"} className={"nav-link"}>Enclosures</NavLink></li>

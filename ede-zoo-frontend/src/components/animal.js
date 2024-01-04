@@ -34,6 +34,7 @@ function Animal() {
     }
 
     useEffect(() => {
+        document.title = "Animals"
         getAllAnimals();
     }, [])
 

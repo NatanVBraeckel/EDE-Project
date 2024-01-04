@@ -1,4 +1,10 @@
+import { useEffect } from "react";
+
 function Home() {
+  useEffect(() => {
+    document.title = "Enterprise zoo";
+  }, []);
+
     return(
       <div style={{ margin: "2rem" }}>
         <h2>Enterprise zoo</h2>

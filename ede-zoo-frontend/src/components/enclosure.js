@@ -34,6 +34,7 @@ function Enclosure() {
     }
 
     useEffect(() => {
+        document.title = "Enclosures"
         getAllEnclosures();
     }, []);
 

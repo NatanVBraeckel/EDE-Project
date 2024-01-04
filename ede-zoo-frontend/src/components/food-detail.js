@@ -62,7 +62,10 @@ function FoodDetail() {
 
     useEffect(() => {
         if(id !== '0') {
+            document.title = "Edit food";
             getFoodData();
+        } else {
+            document.title = "Create food";
         }
     }, [])
 
