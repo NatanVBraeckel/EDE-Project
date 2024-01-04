@@ -45,12 +45,12 @@ function EnclosureCard({ enclosure, afterApiRequest }) {
     let animalCards = null;
     if (enclosure.animals) {
       animalCards = enclosure.animals.map((animal, i) => (
-        <AnimalCard animal={animal} key={i} afterApiRequest={afterApiRequest} />
+        <AnimalCard isChild={true} animal={animal} key={i} afterApiRequest={afterApiRequest} />
       ));
     }
 
     return (
-        <section className="card" style={{ backgroundColor: "#e0e0e0", flexGrow: "1", flexBasis: "1200px" }}>
+        <section className="card" style={{ backgroundColor: "#FFFaf2", flexGrow: "1", flexBasis: "1200px", border: '2px solid #634008'}}>
             <h4 style={style.name}>{ enclosure.name }</h4>
             <div style={style.propertyDiv}>
                 <p style={style.label}>Type:</p>
@@ -75,7 +75,7 @@ function EnclosureCard({ enclosure, afterApiRequest }) {
                 </div>
             </div>
             { jwtToken !== "" &&
-            <div style={{ position: 'absolute', gap: '.6rem', top: '.5rem', right: '5px', display: 'flex' }}>
+            <div style={{ position: 'absolute', gap: '.2rem', top: '.5rem', right: '5px', display: 'flex' }}>
                 <Link to={'/enclosure/' + enclosure.id}>
                     <button className='button editButton'>
                         <FontAwesomeIcon icon="pen-to-square"></FontAwesomeIcon>

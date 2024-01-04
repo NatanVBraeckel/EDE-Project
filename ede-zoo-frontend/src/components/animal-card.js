@@ -5,7 +5,7 @@ import { jwtState } from "../store";
 import FoodCard from "./food-card";
 import AnimalApi from "../api/animal-api";
 
-function AnimalCard({ animal, afterApiRequest }) {
+function AnimalCard({ isChild, animal, afterApiRequest }) {
     const jwtToken = useRecoilValue(jwtState);
 
     const style = {
@@ -22,6 +22,18 @@ function AnimalCard({ animal, afterApiRequest }) {
             fontWeight: 'bold',
         },
     }
+
+    let borderStyle = null;
+    if(isChild) {
+        borderStyle = {
+            border: '2px dashed #634008'
+        }
+    } else {
+        borderStyle = {
+            border: '2px solid #634008'
+        }
+    }
+
     
     async function deleteAnimal(id, jwtToken) {
         console.log("deleting animal with id:", id);
@@ -34,7 +46,7 @@ function AnimalCard({ animal, afterApiRequest }) {
     }
 
     return (
-        <section className="card" style={{ backgroundColor: '#e7e7e7' }}>
+        <section className="card" style={{ backgroundColor: "#FFFaf2", ...borderStyle  }}>
             <h4 style={style.name}>{ animal.name }</h4>
             <div style={style.propertyDiv}>
                 <p style={style.label}>Type:</p>
@@ -55,11 +67,11 @@ function AnimalCard({ animal, afterApiRequest }) {
             <div style={style.propertyDiv}>
                 <p style={{...style.label, marginBottom: '.2rem'}}>Preferred food: </p>
                 { animal.preferredFood != null &&
-                    <FoodCard food={animal.preferredFood} afterApiRequest={afterApiRequest}></FoodCard>
+                    <FoodCard isChild={true} food={animal.preferredFood} afterApiRequest={afterApiRequest}></FoodCard>
                 }
             </div>
             { jwtToken !== "" &&
-            <div style={{ position: 'absolute', gap: '.6rem', top: '.5rem', right: '5px', display: 'flex' }}>
+            <div style={{ position: 'absolute', gap: '.2rem', top: '.5rem', right: '5px', display: 'flex' }}>
                 <Link to={'/animal/' + animal.id}>
                     <button className='button editButton'>
                         <FontAwesomeIcon icon="pen-to-square"></FontAwesomeIcon>

@@ -6,8 +6,8 @@ function Loader({ show }) {
         visible={show}
         height="60"
         width="60"
-        color="#5A9CFF"
-        secondaryColor="#A2C7FF"
+        color="#634008"
+        secondaryColor="#E8C386"
         ariaLabel="oval-loading"
         wrapperStyle={{}}
         wrapperClass=""

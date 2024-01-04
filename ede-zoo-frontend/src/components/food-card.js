@@ -5,7 +5,7 @@ import { useRecoilValue } from 'recoil';
 import { jwtState } from '../store';
 import FoodApi from '../api/food-api';
 
-function FoodCard({ food, afterApiRequest }) {
+function FoodCard({ isChild, food, afterApiRequest }) {
     const jwtToken = useRecoilValue(jwtState);
 
     const style = {
@@ -21,6 +21,17 @@ function FoodCard({ food, afterApiRequest }) {
         label: {
             fontWeight: 'bold',
         },
+    }
+
+    let borderStyle = null;
+    if(isChild) {
+        borderStyle = {
+            border: '2px dotted #634008'
+        }
+    } else {
+        borderStyle = {
+            border: '2px solid #634008'
+        }
     }
 
     function handleStock() {
@@ -56,7 +67,7 @@ function FoodCard({ food, afterApiRequest }) {
     }
 
     return (
-        <section className="card" style={{ backgroundColor: '#eeeeee'}}>
+        <section className="card" style={{ backgroundColor: "#FFFaf2", ...borderStyle }}>
             <h4 style={style.name}>{ food.name }</h4>
             <div style={style.propertyDiv}>
                 <p style={style.label}>Category: </p>
@@ -79,7 +90,7 @@ function FoodCard({ food, afterApiRequest }) {
                 <p style={style.property}>{ food.stock } units in stock</p>
             </div>
             { jwtToken !== "" &&
-            <div style={{ position: 'absolute', gap: '.6rem', top: '.5rem', right: '5px', display: 'flex' }}>
+            <div style={{ position: 'absolute', gap: '.2rem', top: '.5rem', right: '5px', display: 'flex' }}>
                 <button className='button stockButton' onClick={() => handleStock()}>
                     <FontAwesomeIcon icon="cubes-stacked"></FontAwesomeIcon>
                 </button>
