@@ -4,6 +4,7 @@ import { jwtState } from "../store";
 import { useEffect, useState } from "react";
 import EnclosureApi from "../api/enclosure-api";
 import Back from "./back";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function EnclosureDetail() {
     const {id} = useParams();
@@ -115,14 +116,17 @@ function EnclosureDetail() {
                 {animalCodes.map((code, index) => (
                 <div key={index}>
                     <input
+                        style={{ marginBlock: '.2rem'}}
                         type="text"
                         value={code}
                         onChange={(event) => handleInputChange(index, event)}
                     />
-                    <button type="button" onClick={() => handleRemoveInput(index)}>Remove</button>
+                    <button type="button" onClick={() => handleRemoveInput(index)} style={{ marginLeft: '.2rem' }}>
+                        <FontAwesomeIcon icon="xmark"></FontAwesomeIcon>
+                    </button>
                     </div>
                 ))}
-                <button type="button" onClick={handleAddInput}>Add Code</button>
+                <button type="button" onClick={handleAddInput} style={{ marginTop: '.5rem',marginBottom: '1rem', display: 'block'}}>Add Code</button>
                 <button type="submit" disabled={isSubmitting}>{id === '0' ? 'Create' : 'Update'}</button>
             </form>
         </div>

@@ -50,7 +50,7 @@ function EnclosureCard({ enclosure, afterApiRequest }) {
     }
 
     return (
-        <section className="card" style={{ flexGrow: "1" }}>
+        <section className="card" style={{ backgroundColor: "lightblue", flexGrow: "1", flexBasis: "800px" }}>
             <h4 style={style.name}>{ enclosure.name }</h4>
             <div style={style.propertyDiv}>
                 <p style={style.label}>Type:</p>
@@ -70,7 +70,9 @@ function EnclosureCard({ enclosure, afterApiRequest }) {
             </div>
             <div style={style.propertyDiv}>
                 <p style={{...style.label, marginBottom: '.2rem'}}>Animals: </p>
-                { animalCards }
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                    { animalCards }
+                </div>
             </div>
             { jwtToken !== "" &&
             <div style={{ position: 'absolute', gap: '.6rem', top: '.5rem', right: '5px', display: 'flex' }}>
