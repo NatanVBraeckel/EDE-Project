@@ -52,23 +52,25 @@ function EnclosureCard({ enclosure, afterApiRequest }) {
     return (
         <section className="card" style={{ backgroundColor: "#FFFaf2", flexGrow: "1", flexBasis: "1200px", border: '2px solid #634008'}}>
             <h4 style={style.name}>{ enclosure.name }</h4>
-            <div style={style.propertyDiv}>
-                <p style={style.label}>Type:</p>
-                <p style={style.property}>{ enclosure.type }</p>
+            <div style={{ display: 'flex', gap: '2rem' }}>
+                <div style={style.propertyDiv}>
+                    <p style={style.label}>Type:</p>
+                    <p style={style.property}>{ enclosure.type }</p>
+                </div>
+                <div style={style.propertyDiv}>
+                    <p style={style.label}>Size:</p>
+                    <p style={style.property}>{ enclosure.size }</p>
+                </div>
+                <div style={style.propertyDiv}>
+                    <p style={style.label}>Enclosure code:</p>
+                    <p style={style.property}>{ enclosure.enclosureCode }</p>
+                </div>
+                <div style={style.propertyDiv}>
+                    <p style={style.label}>Animal codes:</p>
+                    { animalCodesP }
+                </div>
             </div>
-            <div style={style.propertyDiv}>
-                <p style={style.label}>Size:</p>
-                <p style={style.property}>{ enclosure.size }</p>
-            </div>
-            <div style={style.propertyDiv}>
-                <p style={style.label}>Enclosure code:</p>
-                <p style={style.property}>{ enclosure.enclosureCode }</p>
-            </div>
-            <div style={style.propertyDiv}>
-                <p style={style.label}>Animal codes:</p>
-                { animalCodesP }
-            </div>
-            <div style={style.propertyDiv}>
+            <div>
                 <p style={{...style.label, marginBottom: '.2rem'}}>Animals: </p>
                 <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                     { animalCards }
