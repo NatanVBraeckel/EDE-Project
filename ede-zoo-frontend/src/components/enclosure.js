@@ -4,10 +4,12 @@ import EnclosureCard from "./enclosure-card";
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { jwtState } from "../store";
+import Loader from "./loader";
 
 function Enclosure() {
     const [enclosures, setEnclosures] = useState([]);
     const jwtToken = useRecoilValue(jwtState);
+    const [loading, setLoading] = useState(true);
 
     const style = {
         container: {
@@ -25,6 +27,7 @@ function Enclosure() {
             const result = await EnclosureApi.getAllEnclosures();
             console.log("Result enclosure:", result.data);
             setEnclosures(result.data);
+            setLoading(false);
         } catch {
             console.warn("Something went wrong with the all enclosures call");
         }
@@ -50,6 +53,7 @@ function Enclosure() {
                     </button>
                 </Link>
             }
+            <Loader show={loading} />
             <div style={style.list}>
                 { output }
             </div>

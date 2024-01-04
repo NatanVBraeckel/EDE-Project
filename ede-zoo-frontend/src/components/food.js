@@ -4,9 +4,11 @@ import FoodCard from './food-card';
 import { Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { jwtState } from "../store";
+import Loader from "./loader";
 
 function Food() {
     const jwtToken = useRecoilValue(jwtState);
+    const [loading, setLoading] = useState(true);
 
     const style = {
         container: {
@@ -26,6 +28,7 @@ function Food() {
             const result = await FoodApi.getAllFood();
             console.log("Result food:", result.data);
             setFood(result.data);
+            setLoading(false);
         } catch {
             console.warn("Something went wrong with the all food call");
         }
@@ -51,6 +54,7 @@ function Food() {
                     </button>
                 </Link>
             }
+            <Loader show={loading} />
             <div style={style.list}>{ output }</div>
         </div>
     )

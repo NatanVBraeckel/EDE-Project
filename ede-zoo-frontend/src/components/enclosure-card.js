@@ -50,7 +50,7 @@ function EnclosureCard({ enclosure, afterApiRequest }) {
     }
 
     return (
-        <section className="card" style={{ backgroundColor: "#e0e0e0", flexGrow: "1", flexBasis: "800px" }}>
+        <section className="card" style={{ backgroundColor: "#e0e0e0", flexGrow: "1", flexBasis: "1200px" }}>
             <h4 style={style.name}>{ enclosure.name }</h4>
             <div style={style.propertyDiv}>
                 <p style={style.label}>Type:</p>
@@ -70,7 +70,7 @@ function EnclosureCard({ enclosure, afterApiRequest }) {
             </div>
             <div style={style.propertyDiv}>
                 <p style={{...style.label, marginBottom: '.2rem'}}>Animals: </p>
-                <div style={{ display: 'flex', gap: '1rem' }}>
+                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                     { animalCards }
                 </div>
             </div>
