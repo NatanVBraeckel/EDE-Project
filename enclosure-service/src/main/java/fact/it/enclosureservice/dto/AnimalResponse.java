@@ -19,5 +19,6 @@ public class AnimalResponse {
     private String name;
     private String type;
     private LocalDate birthDate;
+    private String codePreferredFood;
     private FoodResponse preferredFood;
 }
