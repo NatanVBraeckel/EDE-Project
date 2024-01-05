@@ -20,7 +20,7 @@ public class FoodController {
     private final FoodService foodService;
 
     @PostMapping
-    public ResponseEntity<FoodResponse> createAnimal(@RequestBody FoodRequest foodRequest) {
+    public ResponseEntity<FoodResponse> createFood(@RequestBody FoodRequest foodRequest) {
         FoodResponse foodResponse = foodService.createFood(foodRequest);
         return new ResponseEntity<>(foodResponse, HttpStatus.OK);
     }
