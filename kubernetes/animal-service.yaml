@@ -43,7 +43,7 @@ spec:
               value: "3307"
             - name: MYSQL_DB_USERNAME
               value: root
-          image: natanvanbraeckel/animal-service-emptyfc:latest
+          image: natanvanbraeckel/ede-animal-service:latest
           name: animal-service
           ports:
             - containerPort: 8082

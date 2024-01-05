@@ -41,7 +41,7 @@ spec:
               value: enclosure-service:8080
             - name: FOOD_SERVICE_BASEURL
               value: food-service:8081
-          image: natanvanbraeckel/api-gateway-frontend2:latest
+          image: natanvanbraeckel/ede-api-gateway:latest
           name: api-gateway
           ports:
             - containerPort: 8083

@@ -39,7 +39,7 @@ spec:
               value: mongo-enclosure
             - name: MONGODB_PORT
               value: "27017"
-          image: natanvanbraeckel/enclosure-service-arf:latest
+          image: natanvanbraeckel/ede-enclosure-service:latest
           name: enclosure-service
           ports:
             - containerPort: 8080
