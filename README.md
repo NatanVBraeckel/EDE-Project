@@ -12,6 +12,20 @@ Bij het ophalen van een behuizing worden ook alle dieren, en ook samen met hun f
 Gateway base URL: [https://api-gateway-natanvbraeckel.cloud.okteto.net](https://api-gateway-natanvbraeckel.cloud.okteto.net "https://api-gateway-natanvbraeckel.cloud.okteto.net")\
 Dierentuin frontend: [https://ede-zoo-natanvb.netlify.app](https://ede-zoo-natanvb.netlify.app "https://ede-zoo-natanvb.netlify.app")
 
+## Inhoud
+
+1. [Microservices & andere componenten](#microservices--andere-componenten):
+    - [Diagram](#diagram)
+    - [Lijst](#lijst)
+2. [Uitbreidingen](#uitbreidingen)
+    - [Kubernetes Manifest files](#kubernetes-manifest-files-5)
+    - [Logisch gebruik van ClusterIP en Nodeport](#logisch-gebruik-van-clusterip-en-nodeport-5)
+    - [Frontend](#frontend-15)
+3. [Werking van de endpoints via postman](#werking-van-de-endpoints-via-postman)
+    - [Food service](#food-service)
+    - [Animal service](#animal-service)
+    - [Enclosure service](#enclosure-service)
+
 ## Microservices & andere componenten
 
 ### Diagram
@@ -71,7 +85,7 @@ Een ingelogde kan bestaande enclosures bewerken, nieuwe enclosures aanmaken, of 
 
 ### Authenticatie
 
-Alle GET requests worden doorgelaten zonder dat er authenticatie nodig is.\ 
+Alle GET requests worden doorgelaten zonder dat er authenticatie nodig is.\
 Bij een CREATE, PUT of DELETE request zal men zich dus moeten authentificeren via Google Cloud OAuth2.
 
 Dit kan door in Postman een token aan te vragen, en dan de id_token mee te geven als Bearer token.
