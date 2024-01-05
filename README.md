@@ -22,6 +22,7 @@ Dierentuin frontend: [https://ede-zoo-natanvb.netlify.app](https://ede-zoo-natan
     - [Logisch gebruik van ClusterIP en Nodeport](#logisch-gebruik-van-clusterip-en-nodeport-5)
     - [Frontend](#frontend-15)
 3. [Werking van de endpoints via postman](#werking-van-de-endpoints-via-postman)
+    - [Authenticatie](#authenticatie)
     - [Food service](#food-service)
     - [Animal service](#animal-service)
     - [Enclosure service](#enclosure-service)
