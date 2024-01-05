@@ -31,7 +31,7 @@ jobs:
         run: docker build -t ${{ secrets.DOCKER_USER }}/ede-food-service:latest ./food-service
 
       - name: Upload container to Docker Hub with Push
-        run: docker push ${{ secrets.DOCKER_USER }}/ede-food-service-update:latest
+        run: docker push ${{ secrets.DOCKER_USER }}/ede-food-service:latest
   animalservice:
     runs-on: ubuntu-latest
     name: Java 17 build, test, deliver animal-service container
