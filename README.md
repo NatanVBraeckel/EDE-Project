@@ -53,9 +53,13 @@ Ik heb mijn docker-compose.yml file omgezet in Kubernetes Manifest yaml files.
 
 Ik heb er dan 1 yaml file per component van gemaakt, waarin de service, deployment en eventuele volume bij elkaar worden geplaatst. Ze staan in de kubernets folder, zo zal Okteto ze herkennen.
 
+Alles gehost op okteto:
+
+![Okteto](./readme-images/okteto.png)
+
 ### Logisch gebruik van ClusterIP en NodePort (+5%)
 
-Enkel api-gateway.yaml maakt gebruik van een NodePort. Enkel de api-gateway zal dus beschikbaar zijn buiten het netwerk. Zo kunnen externe gebruikers enkel data opvragen via de gateway, en zullen ze dus ook via de authenticatie moeten.
+Enkel api-gateway.yaml maakt gebruik van een NodePort. Enkel de api-gateway zal dus beschikbaar zijn van buiten het netwerk. Zo kunnen externe gebruikers enkel data opvragen via de gateway, en zullen ze dus ook via de authenticatie moeten.
 
 ![Diagram zoo](./readme-images/gateway-service-yaml.png)
 
@@ -94,6 +98,16 @@ Dit kan door in Postman een token aan te vragen, en dan de id_token mee te geven
 ![Token](./readme-images/token.png)
 
 ### Food service
+
+| HTTP | Endpoint | Beschrijving |
+|---	|---	|---	|
+|  	GET   |   /food	|   [Alle food](#all-food)	|
+|   GET	|   /food/{id}	|   [Food via id (kan lijst zijn)](#food-by-id)	|
+|   GET	|   /food/{foodCode}	|   [Food via code (kan lijst zijn)](#food-by-food-code)	|
+|   POST	|   /food   |   [Food aanmaken](#create-food-auth)	|
+|   PUT	|   /food/{id}	|   [Food updaten](#update-food-auth)	|
+|   PUT	|   /food/{id}	|   [Food stock verhogen/verlagen](#update-stock-increase-auth)	|
+|   DELETE	|   /food/{id}	|   [Food verwijderen](#delete-food-auth)	|
 
 #### All food
 
@@ -137,6 +151,15 @@ Dit kan door in Postman een token aan te vragen, en dan de id_token mee te geven
 
 ### Animal service
 
+| HTTP | Endpoint | Beschrijving |
+|---	|---	|---	|
+|  	GET   |   /animal	|   [Alle animals](#all-animals)	|
+|   GET	|   /animal/{id}	|   [Animal via id (kan lijst zijn)](#animal-by-id)	|
+|   GET	|   /animal/{animalCode}	|   [Animal via code (kan lijst zijn)](#animal-by-animal-code)	|
+|   POST	|   /animal   |   [Animal aanmaken](#create-animal-auth)	|
+|   PUT	|   /animal/{id}	|   [Animal updaten](#update-animal-auth)	|(#update-stock-increase-auth)	|
+|   DELETE	|   /animal/{id}	|   [Animal verwijderen](#delete-animal-auth)	|
+
 #### All animals
 
 ![Animal all](./readme-images/animal-all.png)
@@ -170,6 +193,15 @@ Dit kan door in Postman een token aan te vragen, en dan de id_token mee te geven
 ![Animal delete](./readme-images/animal-delete.png)
 
 ### Enclosure service
+
+| HTTP |  Endpoint | Beschrijving |
+|---    |---	|---	|
+|  GET |    /enclosure	|   [Alle enclosures](#all-enclosures)	|
+|   GET	|   /enclosure/{id}	|   [Enclosure via id (kan lijst zijn)](#enclosure-by-id)	|
+|   GET	|   /enclosure/{animalCode}	|   [Enclosure via code (kan lijst zijn)](#enclosure-by-enclosure-code)	|
+|   POST	|   /enclosure   |   [Enclosure aanmaken](#create-enclosure-auth)	|
+|   PUT	|   /enclosure/{id}	|   [Enclosure updaten](#update-enclosure-auth)	|
+|   DELETE	|   /enclosure/{id}	|   [Enclosure verwijderen](#delete-enclosure-auth)	|
 
 #### All enclosures
 
