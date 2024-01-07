@@ -11,6 +11,7 @@ Bij het ophalen van een behuizing worden ook alle dieren, en ook samen met hun f
 
 Gateway base URL: [https://api-gateway-natanvbraeckel.cloud.okteto.net](https://api-gateway-natanvbraeckel.cloud.okteto.net "https://api-gateway-natanvbraeckel.cloud.okteto.net")\
 Dierentuin frontend: [https://ede-zoo-natanvb.netlify.app](https://ede-zoo-natanvb.netlify.app "https://ede-zoo-natanvb.netlify.app")
+Demofim: [https://youtu.be/DLo8qTr-rAg](https://youtu.be/DLo8qTr-rAg "https://youtu.be/DLo8qTr-rAg")
 
 ## Inhoud
 
@@ -71,19 +72,21 @@ Dierentuin frontend: [https://ede-zoo-natanvb.netlify.app](https://ede-zoo-natan
 
 Mijn frontend is gemaakt met React, en maakt het beheren van alle onderdelen van de dierentuin mogelijk.
 
+De frontend is gehost met behulp van Netlify.
+
 *Food*:\
 Een niet ingelogde gebruiker kan de food items zien.\
-Een ingelogde kan bestaande food items bewerken, de stock van een food item verhogen of verminderen, nieuwe food items aanmaken, of bestaande food items verwijderen.
+Een ingelogde gebruiker kan bestaande food items bewerken, de stock van een food item verhogen of verminderen, nieuwe food items aanmaken, of bestaande food items verwijderen.
 ![Frontend food](./readme-images/frontend-food.png)
 
 *Animal*:\
 Een niet ingelogde gebruiker kan de animals zien.\
-Een ingelogde kan bestaande animals bewerken, nieuwe animals aanmaken, of bestaande animals verwijderen.
+Een ingelogde gebruiker kan bestaande animals bewerken, nieuwe animals aanmaken, of bestaande animals verwijderen.
 ![Frontend animal](./readme-images/frontend-animal.png)
 
 *Enclosure*:\
 Een niet ingelogde gebruiker kan de enclosures zien.\
-Een ingelogde kan bestaande enclosures bewerken, nieuwe enclosures aanmaken, of bestaande enclosures verwijderen.
+Een ingelogde gebruiker kan bestaande enclosures bewerken, nieuwe enclosures aanmaken, of bestaande enclosures verwijderen.
 ![Frontend enclosure](./readme-images/frontend-enclosure.png)
 
 ## Werking van de endpoints (via postman)
@@ -102,7 +105,7 @@ Dit kan door in Postman een token aan te vragen, en dan de id_token mee te geven
 | HTTP | Endpoint | Beschrijving |
 |---	|---	|---	|
 |  	GET   |   /food	|   [Alle food](#all-food)	|
-|   GET	|   /food/{id}	|   [Food via id (kan lijst zijn)](#food-by-id)	|
+|   GET	|   /food/byId/{id}	|   [Food via id (kan lijst zijn)](#food-by-id)	|
 |   GET	|   /food/{foodCode}	|   [Food via code (kan lijst zijn)](#food-by-food-code)	|
 |   POST	|   /food   |   [Food aanmaken](#create-food-auth)	|
 |   PUT	|   /food/{id}	|   [Food updaten](#update-food-auth)	|
@@ -154,7 +157,7 @@ Dit kan door in Postman een token aan te vragen, en dan de id_token mee te geven
 | HTTP | Endpoint | Beschrijving |
 |---	|---	|---	|
 |  	GET   |   /animal	|   [Alle animals](#all-animals)	|
-|   GET	|   /animal/{id}	|   [Animal via id (kan lijst zijn)](#animal-by-id)	|
+|   GET	|   /animal/byId/{id}	|   [Animal via id (kan lijst zijn)](#animal-by-id)	|
 |   GET	|   /animal/{animalCode}	|   [Animal via code (kan lijst zijn)](#animal-by-animal-code)	|
 |   POST	|   /animal   |   [Animal aanmaken](#create-animal-auth)	|
 |   PUT	|   /animal/{id}	|   [Animal updaten](#update-animal-auth)	|(#update-stock-increase-auth)	|
@@ -197,7 +200,7 @@ Dit kan door in Postman een token aan te vragen, en dan de id_token mee te geven
 | HTTP |  Endpoint | Beschrijving |
 |---    |---	|---	|
 |  GET |    /enclosure	|   [Alle enclosures](#all-enclosures)	|
-|   GET	|   /enclosure/{id}	|   [Enclosure via id (kan lijst zijn)](#enclosure-by-id)	|
+|   GET	|   /enclosure/byId/{id}	|   [Enclosure via id (kan lijst zijn)](#enclosure-by-id)	|
 |   GET	|   /enclosure/{animalCode}	|   [Enclosure via code (kan lijst zijn)](#enclosure-by-enclosure-code)	|
 |   POST	|   /enclosure   |   [Enclosure aanmaken](#create-enclosure-auth)	|
 |   PUT	|   /enclosure/{id}	|   [Enclosure updaten](#update-enclosure-auth)	|
